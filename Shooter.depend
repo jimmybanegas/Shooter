@@ -1,0 +1,44 @@
+# depslib dependency file v1.0
+1384292773 source:c:\users\affisa-jimmy\documents\progra3\shooter\main.cpp
+	"SDL/SDL.h"
+	"SDL/SDL_image.h"
+	"SDL/SDL_mixer.h"
+	"Background.h"
+	"Player.h"
+	"Enemy.h"
+	"Timer.h"
+	<string>
+
+1382565530 c:\users\affisa-jimmy\documents\progra3\shooter\background.h
+	"SDL/SDL.h"
+	"SDL/SDL_image.h"
+	"SDL/SDL_ttf.h"
+	<string>
+
+1382565530 c:\users\affisa-jimmy\documents\progra3\shooter\player.h
+	"SDL/SDL.h"
+	"SDL/SDL_image.h"
+	"SDL/SDL_ttf.h"
+	<string>
+
+1382565530 c:\users\affisa-jimmy\documents\progra3\shooter\enemy.h
+	"SDL/SDL.h"
+	"SDL/SDL_image.h"
+	"SDL/SDL_ttf.h"
+	<string>
+
+1382565530 c:\users\affisa-jimmy\documents\progra3\shooter\timer.h
+	"SDL/SDL.h"
+
+1382565530 source:c:\users\affisa-jimmy\documents\progra3\shooter\background.cpp
+	"Background.h"
+
+1382565530 source:c:\users\affisa-jimmy\documents\progra3\shooter\enemy.cpp
+	"Enemy.h"
+
+1382565530 source:c:\users\affisa-jimmy\documents\progra3\shooter\player.cpp
+	"Player.h"
+
+1382565530 source:c:\users\affisa-jimmy\documents\progra3\shooter\timer.cpp
+	"Timer.h"
+
