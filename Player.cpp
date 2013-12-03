@@ -3,10 +3,10 @@
 Player::Player(SDL_Surface *screen)
 {
     this->screen = screen;
-    this->images[0] = IMG_Load( "player/1.png" );
-    this->images[1] = IMG_Load( "player/2.png" );
-    this->images[2] = IMG_Load( "player/3.png" );
-    this->images[3] = IMG_Load( "player/4.png" );
+    this->images[0] = IMG_Load( "images/gui/armory-ship-view.png" );
+  //  this->images[1] = IMG_Load( "player/2.png" );
+    //this->images[2] = IMG_Load( "player/3.png" );
+    //this->images[3] = IMG_Load( "player/4.png" );
     this->x = 200;
     this->y = 0;
     this->acceleration=2;
