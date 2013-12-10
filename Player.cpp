@@ -12,6 +12,7 @@ Player::Player(SDL_Surface *screen)
     this->acceleration=2;
     this->velocity=0;
     this->current_frame=0;
+    this->balas=new Bala(x,y);
 }
 
 Player::~Player()
@@ -47,11 +48,10 @@ void Player::jump()
    velocity=-30;
 }
 
-void Player::disparar()
+void Player::disparar(SDL_Surface*screen)
 {
-      Bala bala(screen,this->x, this->y);
-      bala.logic();
-      bala.render();
+    balas->draw(screen,balas->x,balas->y);
+    balas->x+=20;
 }
 
 void Player::render()

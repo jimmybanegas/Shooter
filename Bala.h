@@ -3,30 +3,28 @@
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
 #include "SDL/SDL_ttf.h"
-#include "Player.h"
 #include <string>
 
+#include "SDL/SDL_image.h"
 
 class Bala
 {
     public:
-        int x,y;
-        bool derecha;
-        bool izquierda;
-        bool arriba;
-        bool abajo;
-        int velocity;
-        int acceleration;
-        int current_frame;
-        SDL_Surface *images[3];
-        SDL_Surface *screen;
-
-        Bala(SDL_Surface *screen, int x, int y);
-
-        void logic();
-        void render();
-
+        Bala(int x, int y);
         virtual ~Bala();
+
+        void draw(SDL_Surface* screen, int x, int y);
+
+        bool exists;
+        int x;
+        int y;
+        SDL_Surface* image;
+        //int speedX;
+        //int speedY;
+      //  int damage;
+       // int flightType;
+
+
     protected:
     private:
 };

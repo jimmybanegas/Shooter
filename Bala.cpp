@@ -1,34 +1,36 @@
 #include "Bala.h"
 
-Bala::Bala(SDL_Surface *screen, int x, int y)
+Bala::Bala(int x, int y)
 {
-    this->screen = screen;
-    this->images[0] = IMG_Load( "player/fireball.png" );
+  //  this->screen = screen;
+    //this->images[0] = IMG_Load( "player/fireball.png" );
     this->x = x+70;
     this->y = y;
-    this->acceleration=2;
-    this->velocity=0;
-    this->current_frame=0;
+    //this->acceleration=2;
+    //this->velocity=0;
+    //this->current_frame=0;
+   // this->x=x;
+    //this->y=y;
+    this->image=IMG_Load("player/fireball.png");
     //ctor
 }
 
 Bala::~Bala()
 {
-    SDL_FreeSurface( images[0] );
+   // SDL_FreeSurface( images[0] );
      //dtor
 }
 
 
-void Bala::render()
-{
+void Bala::draw(SDL_Surface* screen,int x,int y) {
+    //Holds offsets
     SDL_Rect offset;
 
-    offset.x = x - images[current_frame]->w/2;
-    offset.y = y - images[current_frame]->h/2;
+    //Get offsets
+    offset.x = x;
+    offset.y = y;
 
-    SDL_BlitSurface( images[current_frame], NULL, screen, &offset );
+    //Blit
+    SDL_BlitSurface( image, NULL, screen, &offset );
 
-    current_frame++;
-    if(current_frame>2)
-        current_frame=0;
 }

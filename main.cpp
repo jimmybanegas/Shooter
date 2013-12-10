@@ -156,10 +156,7 @@ int main( int argc, char* args[] )
                         Mix_PlayChannel( -1, jump, 0 );
                     break;
                     case SDLK_d:
-                         Bala bala(screen,player.x,player.y);
-
-                         bala.render();
-                         bala.logic();
+                        player.disparar(screen);
 
                         //  Mix_PlayChannel( -1, jump, 0 );
                     break;
@@ -205,15 +202,28 @@ int main( int argc, char* args[] )
                     break;
                     case SDLK_RETURN:
                           if(cursor_opciones_y==200)
+                          {
                             menu=false;
-                          if(cursor_opciones_y==270)
-                             apply_surface(0,0,instrucciones,screen);
-                             SDL_Delay(3000);
-                          if(cursor_opciones_y==340)
-                           //quit=true;
-                          if(cursor_opciones_y==410)
+                            break;
+                          }
+                          else if(cursor_opciones_y==270)
+                          {
+                             // SDL_FreeSurface( screen );
+                              apply_surface(0,0,instrucciones,screen);
+                            //  SDL_Delay(5000);
+
+                                switch( event.key.keysym.sym )
+                                {
+                                   case SDLK_RETURN:
+                                       break;
+                                }
+                          }
+
+                          else if(cursor_opciones_y==340)
                             quit=true;
-                    break;
+                          else if(cursor_opciones_y==410)
+                            quit=true;
+                        break;
                   }
             }
             //If the user has Xed out the window

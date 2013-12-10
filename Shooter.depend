@@ -53,3 +53,57 @@
 1366948416 source:c:\users\auditor3\desktop\shooter\timer.cpp
 	"Timer.h"
 
+1366948416 source:c:\users\auditor3\documents\progra3\shooter\background.cpp
+	"Background.h"
+
+1366948416 c:\users\auditor3\documents\progra3\shooter\background.h
+	"SDL/SDL.h"
+	"SDL/SDL_image.h"
+	"SDL/SDL_ttf.h"
+	<string>
+
+1386445709 source:c:\users\auditor3\documents\progra3\shooter\enemy.cpp
+	"Enemy.h"
+
+1386439715 c:\users\auditor3\documents\progra3\shooter\enemy.h
+	"SDL/SDL.h"
+	"SDL/SDL_image.h"
+	"SDL/SDL_ttf.h"
+	<string>
+
+1386654597 source:c:\users\auditor3\documents\progra3\shooter\main.cpp
+	"SDL/SDL.h"
+	"SDL/SDL_image.h"
+	"SDL/SDL_mixer.h"
+	"Background.h"
+	"Player.h"
+	"Enemy.h"
+	"Timer.h"
+	<string>
+
+1386652625 c:\users\auditor3\documents\progra3\shooter\player.h
+	"SDL/SDL.h"
+	"SDL/SDL_image.h"
+	"SDL/SDL_ttf.h"
+	<string>
+	"Bala.h"
+
+1386652848 c:\users\auditor3\documents\progra3\shooter\bala.h
+	"SDL/SDL.h"
+	"SDL/SDL_image.h"
+	"SDL/SDL_ttf.h"
+	<string>
+	"SDL/SDL_image.h"
+
+1366948416 c:\users\auditor3\documents\progra3\shooter\timer.h
+	"SDL/SDL.h"
+
+1386653277 source:c:\users\auditor3\documents\progra3\shooter\player.cpp
+	"Player.h"
+
+1366948416 source:c:\users\auditor3\documents\progra3\shooter\timer.cpp
+	"Timer.h"
+
+1386652855 source:c:\users\auditor3\documents\progra3\shooter\bala.cpp
+	"Bala.h"
+

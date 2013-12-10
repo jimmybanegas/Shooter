@@ -6,6 +6,7 @@
 #include "SDL/SDL_ttf.h"
 #include <string>
 #include "Bala.h"
+using namespace std;
 
 class Player
 {
@@ -17,12 +18,13 @@ public:
     int current_frame;
     SDL_Surface *images[4];
     SDL_Surface *screen;
+    Bala *balas;
 
     Player(SDL_Surface *screen);
     void logic();
     void render();
     void jump();
-    void disparar();
+    void disparar(SDL_Surface*screen);
     virtual ~Player();
 };
 
