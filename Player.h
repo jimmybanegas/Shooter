@@ -5,6 +5,7 @@
 #include "SDL/SDL_image.h"
 #include "SDL/SDL_ttf.h"
 #include <string>
+#include "Bala.h"
 
 class Player
 {
@@ -21,6 +22,7 @@ public:
     void logic();
     void render();
     void jump();
+    void disparar();
     virtual ~Player();
 };
 

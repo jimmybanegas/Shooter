@@ -1,5 +1,40 @@
 # depslib dependency file v1.0
-1384292773 source:c:\users\affisa-jimmy\documents\progra3\shooter\main.cpp
+1366948416 source:c:\users\auditor3\desktop\shooter\background.cpp
+	"Background.h"
+
+1366948416 c:\users\auditor3\desktop\shooter\background.h
+	"SDL/SDL.h"
+	"SDL/SDL_image.h"
+	"SDL/SDL_ttf.h"
+	<string>
+
+1386464560 source:c:\users\auditor3\desktop\shooter\bala.cpp
+	"Bala.h"
+
+1386450914 c:\users\auditor3\desktop\shooter\bala.h
+	"SDL/SDL.h"
+	"SDL/SDL_image.h"
+	"SDL/SDL_ttf.h"
+	"Player.h"
+	<string>
+
+1386449545 c:\users\auditor3\desktop\shooter\player.h
+	"SDL/SDL.h"
+	"SDL/SDL_image.h"
+	"SDL/SDL_ttf.h"
+	<string>
+	"Bala.h"
+
+1386445709 source:c:\users\auditor3\desktop\shooter\enemy.cpp
+	"Enemy.h"
+
+1386439715 c:\users\auditor3\desktop\shooter\enemy.h
+	"SDL/SDL.h"
+	"SDL/SDL_image.h"
+	"SDL/SDL_ttf.h"
+	<string>
+
+1386469060 source:c:\users\auditor3\desktop\shooter\main.cpp
 	"SDL/SDL.h"
 	"SDL/SDL_image.h"
 	"SDL/SDL_mixer.h"
@@ -9,79 +44,12 @@
 	"Timer.h"
 	<string>
 
-1382565530 c:\users\affisa-jimmy\documents\progra3\shooter\background.h
-	"SDL/SDL.h"
-	"SDL/SDL_image.h"
-	"SDL/SDL_ttf.h"
-	<string>
-
-1382565530 c:\users\affisa-jimmy\documents\progra3\shooter\player.h
-	"SDL/SDL.h"
-	"SDL/SDL_image.h"
-	"SDL/SDL_ttf.h"
-	<string>
-
-1382565530 c:\users\affisa-jimmy\documents\progra3\shooter\enemy.h
-	"SDL/SDL.h"
-	"SDL/SDL_image.h"
-	"SDL/SDL_ttf.h"
-	<string>
-
-1382565530 c:\users\affisa-jimmy\documents\progra3\shooter\timer.h
+1366948416 c:\users\auditor3\desktop\shooter\timer.h
 	"SDL/SDL.h"
 
-1382565530 source:c:\users\affisa-jimmy\documents\progra3\shooter\background.cpp
-	"Background.h"
-
-1382565530 source:c:\users\affisa-jimmy\documents\progra3\shooter\enemy.cpp
-	"Enemy.h"
-
-1382565530 source:c:\users\affisa-jimmy\documents\progra3\shooter\player.cpp
+1386451838 source:c:\users\auditor3\desktop\shooter\player.cpp
 	"Player.h"
 
-1382565530 source:c:\users\affisa-jimmy\documents\progra3\shooter\timer.cpp
-	"Timer.h"
-
-1385751546 source:c:\users\auditor3\documents\progra3\shooter\background.cpp
-	"Background.h"
-
-1385751546 c:\users\auditor3\documents\progra3\shooter\background.h
-	"SDL/SDL.h"
-	"SDL/SDL_image.h"
-	"SDL/SDL_ttf.h"
-	<string>
-
-1385751560 source:c:\users\auditor3\documents\progra3\shooter\enemy.cpp
-	"Enemy.h"
-
-1385751560 c:\users\auditor3\documents\progra3\shooter\enemy.h
-	"SDL/SDL.h"
-	"SDL/SDL_image.h"
-	"SDL/SDL_ttf.h"
-	<string>
-
-1385916921 source:c:\users\auditor3\documents\progra3\shooter\main.cpp
-	"SDL/SDL.h"
-	"SDL/SDL_image.h"
-	"SDL/SDL_mixer.h"
-	"Background.h"
-	"Player.h"
-	"Enemy.h"
-	"Timer.h"
-	<string>
-
-1385751560 c:\users\auditor3\documents\progra3\shooter\player.h
-	"SDL/SDL.h"
-	"SDL/SDL_image.h"
-	"SDL/SDL_ttf.h"
-	<string>
-
-1385751560 c:\users\auditor3\documents\progra3\shooter\timer.h
-	"SDL/SDL.h"
-
-1386047161 source:c:\users\auditor3\documents\progra3\shooter\player.cpp
-	"Player.h"
-
-1385751560 source:c:\users\auditor3\documents\progra3\shooter\timer.cpp
+1366948416 source:c:\users\auditor3\desktop\shooter\timer.cpp
 	"Timer.h"
 

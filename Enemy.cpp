@@ -26,6 +26,12 @@ void Enemy::logic()
     x-=10;
     if(x<-100)
         x=1000;
+
+   if(y>50)
+     y--;
+   else
+      y=400;
+
 }
 
 void Enemy::jump()

@@ -9,8 +9,11 @@
 class Enemy
 {
 public:
-    int x;
-    int y;
+    int x,y;
+    bool derecha;
+    bool izquierda;
+    bool arriba;
+    bool abajo;
     int velocity;
     int acceleration;
     int current_frame;

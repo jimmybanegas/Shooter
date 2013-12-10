@@ -3,12 +3,12 @@
 Player::Player(SDL_Surface *screen)
 {
     this->screen = screen;
-    this->images[0] = IMG_Load( "images/gui/armory-ship-view.png" );
-  //  this->images[1] = IMG_Load( "player/2.png" );
-    //this->images[2] = IMG_Load( "player/3.png" );
-    //this->images[3] = IMG_Load( "player/4.png" );
-    this->x = 200;
-    this->y = 0;
+    this->images[0] = IMG_Load( "player/1.png" );
+    this->images[1] = IMG_Load( "player/2.png" );
+    this->images[2] = IMG_Load( "player/3.png" );
+    this->images[3] = IMG_Load( "player/4.png" );
+    this->x = 90;
+    this->y = 60;
     this->acceleration=2;
     this->velocity=0;
     this->current_frame=0;
@@ -24,24 +24,39 @@ Player::~Player()
 
 void Player::logic()
 {
-    y+=velocity;
-    velocity+=acceleration;
     if(y>=500-images[current_frame]->w/2)
     {
         y=500-images[current_frame]->w/2;
         velocity=0;
     }
+
+     if(y>600)
+       y=600;
+     if(y<60)
+        y=60;
+     if(x>900)
+      x=900;
+     if(x<90)
+        x=90;
 }
 
 void Player::jump()
 {
-    velocity=-30;
+   y+=velocity;
+   velocity+=acceleration;
+   velocity=-30;
+}
+
+void Player::disparar()
+{
+      Bala bala(screen,this->x, this->y);
+      bala.logic();
+      bala.render();
 }
 
 void Player::render()
 {
     SDL_Rect offset;
-
     offset.x = x - images[current_frame]->w/2;
     offset.y = y - images[current_frame]->h/2;
 
