@@ -1,27 +1,26 @@
-#include "Enemy.h"
+#include "Enemy2.h"
 
-Enemy::Enemy()
+Enemy2::Enemy2(SDL_Surface *screen)
 {
-  //  this->screen = screen;
-    this->images[0] = IMG_Load( "enemy/1.png" );
-    this->images[1] = IMG_Load( "enemy/2.png" );
-    this->images[2] = IMG_Load( "enemy/3.png" );
-    this->x = 1000;
+    this->screen = screen;
+    this->images[0] = IMG_Load( "enemy/bandit-interceptor1.png" );
+    this->images[1] = IMG_Load( "enemy/bandit-interceptor2.png" );
+    this->x = 800;
     this->y = 400;
     this->acceleration=2;
     this->velocity=0;
     this->current_frame=0;
+    //ctor
 }
 
-Enemy::~Enemy()
+Enemy2::~Enemy2()
 {
     SDL_FreeSurface( images[0] );
     SDL_FreeSurface( images[1] );
-    SDL_FreeSurface( images[2] );
-    SDL_FreeSurface( images[3] );
+
 }
 
-void Enemy::logic()
+void Enemy2::logic()
 {
     x-=10;
     if(x<-100)
@@ -34,12 +33,12 @@ void Enemy::logic()
 
 }
 
-void Enemy::jump()
+void Enemy2::jump()
 {
     velocity=-30;
 }
 
-void Enemy::render()
+void Enemy2::render()
 {
     SDL_Rect offset;
 

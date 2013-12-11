@@ -1,27 +1,33 @@
-#include "Enemy.h"
-
-Enemy::Enemy()
+#include "Enemy5.h"
+Enemy5::Enemy5(SDL_Surface *screen)
 {
-  //  this->screen = screen;
-    this->images[0] = IMG_Load( "enemy/1.png" );
-    this->images[1] = IMG_Load( "enemy/2.png" );
-    this->images[2] = IMG_Load( "enemy/3.png" );
-    this->x = 1000;
-    this->y = 400;
+    this->screen = screen;
+    this->images[0] = IMG_Load( "enemy/f1.png" );
+    this->images[1] = IMG_Load( "enemy/f2.png" );
+    this->images[2] = IMG_Load( "enemy/f3.png" );
+    this->images[3] = IMG_Load( "enemy/f4.png" );
+    this->images[4] = IMG_Load( "enemy/f5.png" );
+    this->images[5] = IMG_Load( "enemy/f6.png" );
+    this->x = 500;
+    this->y = 250;
     this->acceleration=2;
     this->velocity=0;
     this->current_frame=0;
+    //ctor
 }
 
-Enemy::~Enemy()
+Enemy5::~Enemy5()
 {
     SDL_FreeSurface( images[0] );
     SDL_FreeSurface( images[1] );
     SDL_FreeSurface( images[2] );
     SDL_FreeSurface( images[3] );
+    SDL_FreeSurface( images[4] );
+    SDL_FreeSurface( images[5] );
+
 }
 
-void Enemy::logic()
+void Enemy5::logic()
 {
     x-=10;
     if(x<-100)
@@ -34,12 +40,12 @@ void Enemy::logic()
 
 }
 
-void Enemy::jump()
+void Enemy5::jump()
 {
     velocity=-30;
 }
 
-void Enemy::render()
+void Enemy5::render()
 {
     SDL_Rect offset;
 

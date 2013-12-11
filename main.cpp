@@ -5,6 +5,13 @@
 #include "Background.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "Enemy1.h"
+#include "Enemy2.h"
+#include "Enemy3.h"
+#include "Enemy4.h"
+#include "Enemy5.h"
+#include "Enemy6.h"
+#include "Enemy7.h"
 #include "Timer.h"
 #include <string>
 
@@ -101,7 +108,13 @@ int main( int argc, char* args[] )
 
     Background background(screen);
     Player player(screen);
-    Enemy enemy(screen);
+    Enemy1 enemy1(screen);
+    Enemy2 enemy2(screen);
+    Enemy3 enemy3(screen);
+    Enemy4 enemy4(screen);
+    Enemy5 enemy5(screen);
+    Enemy6 enemy6(screen);
+    Enemy7 enemy7(screen);
 
     SDL_Event event;
     //Quit flag
@@ -116,8 +129,8 @@ int main( int argc, char* args[] )
 
     while( quit == false )
     {
-        if(menu)
-             Mix_PlayChannel( -1, tittle, 0 );
+      //  if(menu)
+            // Mix_PlayChannel( -1, tittle, 0 );
      //   else if(!=menu)
            //  Mix_PlayChannel( -1, tittle, 0 );
 
@@ -137,19 +150,19 @@ int main( int argc, char* args[] )
                         if (menu==true)
                           cursor_opciones_y--;
                         if (menu==false)
-                         player.y-=100;
+                         player.y-=20;
                     break;
                     case SDLK_DOWN:
                         if (menu==true)
                         cursor_opciones_y++;
                         if (menu==false)
-                          player.y+=100;
+                          player.y+=20;
                     break;
                     case SDLK_LEFT:
-                         player.x-=100;
+                         player.x-=20;
                     break;
                     case SDLK_RIGHT:
-                         player.x+=100;
+                         player.x+=20;
                     break;
                     case SDLK_SPACE:
                         player.jump();
@@ -184,15 +197,14 @@ int main( int argc, char* args[] )
             //If a key was pressed
             if( event.type == SDL_KEYDOWN )
             {
-                  if(cursor_opciones_y<=200)
+                 /* if(cursor_opciones_y>200)
                             cursor_opciones_y=200;
-                  if(cursor_opciones_y>=410)
-                            cursor_opciones_y=410;
+                  if(cursor_opciones_y>410)
+                            cursor_opciones_y=410;*/
 
                 //Set the proper message surface
                 switch( event.key.keysym.sym )
                 {
-
                     case SDLK_ESCAPE: quit = true; break;
                     case SDLK_UP:
                           cursor_opciones_y-=70;
@@ -204,7 +216,7 @@ int main( int argc, char* args[] )
                           if(cursor_opciones_y==200)
                           {
                             menu=false;
-                            break;
+                            //break;
                           }
                           else if(cursor_opciones_y==270)
                           {
@@ -218,7 +230,6 @@ int main( int argc, char* args[] )
                                        break;
                                 }
                           }
-
                           else if(cursor_opciones_y==340)
                             quit=true;
                           else if(cursor_opciones_y==410)
@@ -240,7 +251,13 @@ int main( int argc, char* args[] )
 
         background.logic();
         player.logic();
-        enemy.logic();
+        enemy1.logic();
+        enemy2.logic();
+        enemy3.logic();
+        enemy4.logic();
+        enemy5.logic();
+        enemy6.logic();
+        enemy7.logic();
         SDL_Rect offset;
         offset.x = 0;
         offset.y = 0;
@@ -260,8 +277,13 @@ int main( int argc, char* args[] )
 
         background.render();
         player.render();
-        enemy.render();
-
+        enemy1.render();
+        enemy2.render();
+        enemy3.render();
+        enemy4.render();
+        enemy5.render();
+        enemy6.render();
+        enemy7.render();
         }
 
         frameCap();

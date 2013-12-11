@@ -1,4 +1,6 @@
 #include "Player.h"
+#include "Bala.h"
+
 
 Player::Player(SDL_Surface *screen)
 {
@@ -12,8 +14,9 @@ Player::Player(SDL_Surface *screen)
     this->acceleration=2;
     this->velocity=0;
     this->current_frame=0;
-    this->balas=new Bala(x,y);
+   // this->balas=NULL;
 }
+
 
 Player::~Player()
 {
@@ -21,6 +24,16 @@ Player::~Player()
     SDL_FreeSurface( images[1] );
     SDL_FreeSurface( images[2] );
     SDL_FreeSurface( images[3] );
+}
+
+int Player::getx()
+{
+    this->x;
+}
+
+int Player::gety()
+{
+    this->y;
 }
 
 void Player::logic()
@@ -50,6 +63,7 @@ void Player::jump()
 
 void Player::disparar(SDL_Surface*screen)
 {
+    Bala *balas = new Bala(this->x,this->y);
     balas->draw(screen,balas->x,balas->y);
     balas->x+=20;
 }

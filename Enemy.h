@@ -20,10 +20,10 @@ public:
     SDL_Surface *images[3];
     SDL_Surface *screen;
 
-    Enemy(SDL_Surface *screen);
-    void logic();
-    void render();
-    void jump();
+    Enemy();
+    virtual void logic();
+    virtual void render();
+    virtual void jump();
     virtual ~Enemy();
 };
 

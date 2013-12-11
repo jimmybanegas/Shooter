@@ -24,6 +24,8 @@ public:
     void logic();
     void render();
     void jump();
+    int getx();
+    int gety();
     void disparar(SDL_Surface*screen);
     virtual ~Player();
 };

@@ -1,8 +1,8 @@
-#include "Enemy.h"
+#include "Enemy1.h"
 
-Enemy::Enemy()
+Enemy1::Enemy1(SDL_Surface *screen)
 {
-  //  this->screen = screen;
+    this->screen = screen;
     this->images[0] = IMG_Load( "enemy/1.png" );
     this->images[1] = IMG_Load( "enemy/2.png" );
     this->images[2] = IMG_Load( "enemy/3.png" );
@@ -13,7 +13,7 @@ Enemy::Enemy()
     this->current_frame=0;
 }
 
-Enemy::~Enemy()
+Enemy1::~Enemy1()
 {
     SDL_FreeSurface( images[0] );
     SDL_FreeSurface( images[1] );
@@ -21,7 +21,7 @@ Enemy::~Enemy()
     SDL_FreeSurface( images[3] );
 }
 
-void Enemy::logic()
+void Enemy1::logic()
 {
     x-=10;
     if(x<-100)
@@ -34,12 +34,12 @@ void Enemy::logic()
 
 }
 
-void Enemy::jump()
+void Enemy1::jump()
 {
     velocity=-30;
 }
 
-void Enemy::render()
+void Enemy1::render()
 {
     SDL_Rect offset;
 
