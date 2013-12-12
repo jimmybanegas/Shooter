@@ -1,6 +1,6 @@
 #ifndef ENEMY_H
 #define ENEMY_H
-
+#include "Player.h"
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
 #include "SDL/SDL_ttf.h"
@@ -9,6 +9,7 @@
 class Enemy
 {
 public:
+    Player *player;
     int x,y;
     bool derecha;
     bool izquierda;
@@ -21,9 +22,12 @@ public:
     SDL_Surface *screen;
 
     Enemy();
+    int getx();
+    int gety();
     virtual void logic();
     virtual void render();
     virtual void jump();
+    virtual bool checkCollision();
     virtual ~Enemy();
 };
 

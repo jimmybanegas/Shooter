@@ -1,7 +1,8 @@
 #include "Enemy6.h"
 
-Enemy6::Enemy6(SDL_Surface *screen)
+Enemy6::Enemy6(SDL_Surface *screen, Player *player)
 {
+    this->player=player;
     this->screen = screen;
     this->images[0] = IMG_Load( "enemy/flying-saucer1.png" );
     this->images[1] = IMG_Load( "enemy/flying-saucer2.png" );
@@ -26,14 +27,17 @@ Enemy6::~Enemy6()
 
 void Enemy6::logic()
 {
-    x-=10;
+    if(checkCollision())
+        this->player->vida-=5;
+
+    x-=8;
     if(x<-100)
         x=1000;
 
-   if(y>50)
+   /*if(y>50)
      y--;
    else
-      y=400;
+      y=400;*/
 
 }
 

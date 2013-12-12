@@ -51,6 +51,23 @@ void apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination,
     SDL_BlitSurface( source, clip, destination, &offset );
 }
 
+void clean_up()
+{
+        //Free the surfaces
+    SDL_FreeSurface( screen );
+    // SDL_FreeSurface( gameover );
+    // Mix_FreeMusic( score_surface );
+    //  Mix_FreeChunk( high );
+    //Close the font
+    //    TTF_CloseFont( font );
+    //Quit SDL_ttf
+    TTF_Quit();
+    Mix_CloseAudio();
+    //Quit SDL
+    SDL_Quit();
+}
+
+
 bool init()
 {
     //Initialize all SDL subsystems
@@ -100,21 +117,21 @@ int main( int argc, char* args[] )
     SDL_Surface * game_over = IMG_Load( "game_over.png" );
 
     TTF_Font *font = TTF_OpenFont( "lazy.ttf", 30 );
-    SDL_Color textColor = { 0, 0, 0 };
+    SDL_Color textColor = { 255, 255, 255 };
     SDL_Surface * score_surface = NULL;
 
     Mix_Chunk *jump = Mix_LoadWAV( "jump.ogg" );
     Mix_Chunk *tittle = Mix_LoadWAV( "title.ogg" );
 
     Background background(screen);
-    Player player(screen);
-    Enemy1 enemy1(screen);
-    Enemy2 enemy2(screen);
-    Enemy3 enemy3(screen);
-    Enemy4 enemy4(screen);
-    Enemy5 enemy5(screen);
-    Enemy6 enemy6(screen);
-    Enemy7 enemy7(screen);
+    Player *player=new Player(screen);
+    Enemy1 enemy1(screen,player);
+    Enemy2 enemy2(screen,player);
+    Enemy3 enemy3(screen,player);
+    Enemy4 enemy4(screen,player);
+    Enemy5 enemy5(screen,player);
+    Enemy6 enemy6(screen,player);
+    Enemy7 enemy7(screen,player);
 
     SDL_Event event;
     //Quit flag
@@ -133,10 +150,10 @@ int main( int argc, char* args[] )
             // Mix_PlayChannel( -1, tittle, 0 );
      //   else if(!=menu)
            //  Mix_PlayChannel( -1, tittle, 0 );
-
+        SDL_Surface * vidas_surface = TTF_RenderText_Solid( font, toString(player->vida).c_str(), textColor );
 
                //If there's an event to handle
-
+        Uint8 *keystates = SDL_GetKeyState( NULL );
         if( SDL_PollEvent( &event ) )
         {
             //If a key was pressed
@@ -150,35 +167,41 @@ int main( int argc, char* args[] )
                         if (menu==true)
                           cursor_opciones_y--;
                         if (menu==false)
-                         player.y-=20;
+                         player->y-=20;
                     break;
                     case SDLK_DOWN:
                         if (menu==true)
                         cursor_opciones_y++;
                         if (menu==false)
-                          player.y+=20;
+                          player->y+=20;
                     break;
                     case SDLK_LEFT:
-                         player.x-=20;
+                         player->x-=20;
                     break;
                     case SDLK_RIGHT:
-                         player.x+=20;
+                         player->x+=20;
                     break;
                     case SDLK_SPACE:
-                        player.jump();
+                        player->jump();
                         Mix_PlayChannel( -1, jump, 0 );
                     break;
                     case SDLK_d:
-                        player.disparar(screen);
+                          player->vida-=5;
+                    break;
+                      //  player.disparar(screen);
 
                         //  Mix_PlayChannel( -1, jump, 0 );
-                    break;
+                 //   break;
 
                     /*default:
                         break;*/
                   }
             }
-            //If the user has Xed out the window
+            else if( keystates[ SDLK_d ] )
+            {
+                  player->disparar(screen);
+
+            }
             else if( event.type == SDL_QUIT )
             {
                 //Quit the program
@@ -249,8 +272,25 @@ int main( int argc, char* args[] )
         if (menu==false)
         {
 
+           if(enemy1.checkCollision())
+            player->vida-=5;
+           if(enemy2.checkCollision())
+            player->vida-=5;
+           if(enemy3.checkCollision())
+            player->vida-=5;
+           if(enemy4.checkCollision())
+            player->vida-=5;
+           if(enemy5.checkCollision())
+            player->vida-=5;
+           if(enemy6.checkCollision())
+            player->vida-=5;
+           if(enemy7.checkCollision())
+            player->vida-=5;
+
+        apply_surface(635,50,vidas_surface,screen);
         background.logic();
-        player.logic();
+        apply_surface(635,50,vidas_surface,screen);
+        player->logic();
         enemy1.logic();
         enemy2.logic();
         enemy3.logic();
@@ -258,13 +298,16 @@ int main( int argc, char* args[] )
         enemy5.logic();
         enemy6.logic();
         enemy7.logic();
+
         SDL_Rect offset;
         offset.x = 0;
         offset.y = 0;
+
         SDL_Surface * score_surface = TTF_RenderText_Solid( font, toString(score+=5).c_str(), textColor );
         SDL_BlitSurface( score_surface, NULL, screen, &offset );
         SDL_Flip( screen );
         SDL_FreeSurface( score_surface );
+        SDL_FreeSurface( vidas_surface );
 
        /* if(player.x-enemy.x<50
            && player.x-enemy.x>-50
@@ -276,7 +319,7 @@ int main( int argc, char* args[] )
         }*/
 
         background.render();
-        player.render();
+        player->render();
         enemy1.render();
         enemy2.render();
         enemy3.render();
@@ -284,6 +327,7 @@ int main( int argc, char* args[] )
         enemy5.render();
         enemy6.render();
         enemy7.render();
+
         }
 
         frameCap();
@@ -330,6 +374,9 @@ int main( int argc, char* args[] )
             return 1;
         }
     }
+
+
+    clean_up();
 
     return 0;
 }

@@ -1,7 +1,8 @@
 #include "Enemy1.h"
 
-Enemy1::Enemy1(SDL_Surface *screen)
+Enemy1::Enemy1(SDL_Surface *screen, Player *player)
 {
+    this->player=player;
     this->screen = screen;
     this->images[0] = IMG_Load( "enemy/1.png" );
     this->images[1] = IMG_Load( "enemy/2.png" );
@@ -23,14 +24,17 @@ Enemy1::~Enemy1()
 
 void Enemy1::logic()
 {
-    x-=10;
+    if(checkCollision())
+        this->player->vida-=5;
+
+    x-=7;
     if(x<-100)
         x=1000;
 
-   if(y>50)
+ /*  if(y>50)
      y--;
    else
-      y=400;
+      y=400;*/
 
 }
 

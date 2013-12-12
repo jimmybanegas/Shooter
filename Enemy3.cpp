@@ -1,7 +1,8 @@
 #include "Enemy3.h"
 
-Enemy3::Enemy3(SDL_Surface *screen)
+Enemy3::Enemy3(SDL_Surface *screen, Player *player)
 {
+    this->player=player;
     this->screen = screen;
     this->images[0] = IMG_Load( "enemy/boss-tentacles1.png" );
     this->images[1] = IMG_Load( "enemy/boss-tentacles2.png" );
@@ -30,14 +31,17 @@ Enemy3::~Enemy3()
 
 void Enemy3::logic()
 {
-    x-=10;
+     if(checkCollision())
+        this->player->vida-=5;
+
+    x-=7;
     if(x<-100)
         x=1000;
 
-   if(y>50)
+  /* if(y>50)
      y--;
    else
-      y=400;
+      y=400;*/
 
 }
 

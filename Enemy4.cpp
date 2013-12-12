@@ -1,7 +1,8 @@
 #include "Enemy4.h"
 
-Enemy4::Enemy4(SDL_Surface *screen)
+Enemy4::Enemy4(SDL_Surface *screen, Player *player)
 {
+    this->player=player;
     this->screen = screen;
     this->images[0] = IMG_Load( "enemy/e_f1.png" );
     this->images[1] = IMG_Load( "enemy/e_f2.png" );
@@ -31,14 +32,17 @@ Enemy4::~Enemy4()
 
 void Enemy4::logic()
 {
-    x-=10;
+    if(checkCollision())
+        this->player->vida-=5;
+
+    x-=5;
     if(x<-100)
         x=1000;
 
-   if(y>50)
+/*   if(y>50)
      y--;
    else
-      y=400;
+      y=400;*/
 
 }
 
@@ -60,3 +64,4 @@ void Enemy4::render()
     if(current_frame>2)
         current_frame=0;
 }
+

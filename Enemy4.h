@@ -9,7 +9,7 @@
 class Enemy4 : public Enemy
 {
     public:
-        Enemy4(SDL_Surface *screen);
+        Enemy4(SDL_Surface *screen, Player *player);
         SDL_Surface *images[6];
         void logic();
         void render();

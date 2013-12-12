@@ -1,12 +1,13 @@
 #include "Enemy2.h"
 
-Enemy2::Enemy2(SDL_Surface *screen)
+Enemy2::Enemy2(SDL_Surface *screen, Player *player)
 {
+    this->player=player;
     this->screen = screen;
     this->images[0] = IMG_Load( "enemy/bandit-interceptor1.png" );
     this->images[1] = IMG_Load( "enemy/bandit-interceptor2.png" );
     this->x = 800;
-    this->y = 400;
+    this->y = 100;
     this->acceleration=2;
     this->velocity=0;
     this->current_frame=0;
@@ -16,20 +17,23 @@ Enemy2::Enemy2(SDL_Surface *screen)
 Enemy2::~Enemy2()
 {
     SDL_FreeSurface( images[0] );
-    SDL_FreeSurface( images[1] );
+   SDL_FreeSurface( images[1] );
 
 }
 
 void Enemy2::logic()
 {
-    x-=10;
+   if(checkCollision())
+        this->player->vida-=5;
+
+    x-=6;
     if(x<-100)
         x=1000;
 
-   if(y>50)
+  /* if(y>50)
      y--;
    else
-      y=400;
+      y=400;*/
 
 }
 
@@ -48,6 +52,6 @@ void Enemy2::render()
     SDL_BlitSurface( images[current_frame], NULL, screen, &offset );
 
     current_frame++;
-    if(current_frame>2)
+    if(current_frame>1)
         current_frame=0;
 }

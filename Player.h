@@ -15,6 +15,7 @@ public:
     int y;
     int velocity;
     int acceleration;
+    int vida;
     int current_frame;
     SDL_Surface *images[4];
     SDL_Surface *screen;

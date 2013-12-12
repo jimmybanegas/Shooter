@@ -1,6 +1,7 @@
 #include "Enemy5.h"
-Enemy5::Enemy5(SDL_Surface *screen)
+Enemy5::Enemy5(SDL_Surface *screen, Player *player)
 {
+    this->player=player;
     this->screen = screen;
     this->images[0] = IMG_Load( "enemy/f1.png" );
     this->images[1] = IMG_Load( "enemy/f2.png" );
@@ -29,14 +30,18 @@ Enemy5::~Enemy5()
 
 void Enemy5::logic()
 {
-    x-=10;
+    if(checkCollision())
+        this->player->vida-=5;
+
+    x-=6;
     if(x<-100)
         x=1000;
 
-   if(y>50)
+   /*if(y>50)
      y--;
    else
       y=400;
+      */
 
 }
 
