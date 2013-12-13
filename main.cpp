@@ -2,8 +2,11 @@
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
 #include "SDL/SDL_mixer.h"
+#include <string>
+#include <vector>
 #include "Background.h"
-#include "Player.h"
+
+#include "Bala.h"
 #include "Enemy.h"
 #include "Enemy1.h"
 #include "Enemy2.h"
@@ -13,7 +16,7 @@
 #include "Enemy6.h"
 #include "Enemy7.h"
 #include "Timer.h"
-#include <string>
+#include "Player.h"
 
 //Screen attributes
 const int SCREEN_WIDTH = 1000;
@@ -121,6 +124,8 @@ int main( int argc, char* args[] )
     SDL_Surface * score_surface = NULL;
 
     Mix_Chunk *jump = Mix_LoadWAV( "jump.ogg" );
+    Mix_Chunk *shot = Mix_LoadWAV( "laser-pink.ogg" );
+    Mix_Chunk *gameover = Mix_LoadWAV( "game-over.ogg" );
     Mix_Chunk *tittle = Mix_LoadWAV( "title.ogg" );
 
     Background background(screen);
@@ -150,10 +155,42 @@ int main( int argc, char* args[] )
             // Mix_PlayChannel( -1, tittle, 0 );
      //   else if(!=menu)
            //  Mix_PlayChannel( -1, tittle, 0 );
+           if(enemy1.checkCollision())
+            player->vida-=0.5;
+           if(enemy2.checkCollision())
+            player->vida-=0.5;
+           if(enemy3.checkCollision())
+            player->vida-=0.5;
+           if(enemy4.checkCollision())
+            player->vida-=0.5;
+           if(enemy5.checkCollision())
+            player->vida-=0.5;
+           if(enemy6.checkCollision())
+            player->vida-=0.5;
+           if(enemy7.checkCollision())
+            player->vida-=0.5;
+
+        SDL_Rect offset;
+        offset.x = 0;
+        offset.y = 0;
+        if(player->vida==0)
+           break;
+
         SDL_Surface * vidas_surface = TTF_RenderText_Solid( font, toString(player->vida).c_str(), textColor );
 
                //If there's an event to handle
         Uint8 *keystates = SDL_GetKeyState( NULL );
+
+          if( keystates[ SDLK_d ] )
+            {
+               player->bullets.push_back(new Bala(player->getx()+10, player->gety()));
+               Mix_PlayChannel( -1, shot, 0 );
+
+            }
+
+           player->disparar(screen);
+
+
         if( SDL_PollEvent( &event ) )
         {
             //If a key was pressed
@@ -167,13 +204,21 @@ int main( int argc, char* args[] )
                         if (menu==true)
                           cursor_opciones_y--;
                         if (menu==false)
-                         player->y-=20;
+                        {
+                            //Mix_PlayChannel( -1, jump, 0 );
+                            player->y-=20;
+                        }
+
                     break;
                     case SDLK_DOWN:
                         if (menu==true)
                         cursor_opciones_y++;
                         if (menu==false)
-                          player->y+=20;
+                        {
+                             //Mix_PlayChannel( -1, jump, 0 );
+                             player->y+=20;
+                        }
+
                     break;
                     case SDLK_LEFT:
                          player->x-=20;
@@ -183,10 +228,11 @@ int main( int argc, char* args[] )
                     break;
                     case SDLK_SPACE:
                         player->jump();
-                        Mix_PlayChannel( -1, jump, 0 );
+                        //Mix_PlayChannel( -1, jump, 0 );
                     break;
                     case SDLK_d:
-                          player->vida-=5;
+
+                        //  Mix_PlayChannel( -1, shot, 0 );
                     break;
                       //  player.disparar(screen);
 
@@ -196,11 +242,6 @@ int main( int argc, char* args[] )
                     /*default:
                         break;*/
                   }
-            }
-            else if( keystates[ SDLK_d ] )
-            {
-                  player->disparar(screen);
-
             }
             else if( event.type == SDL_QUIT )
             {
@@ -272,24 +313,8 @@ int main( int argc, char* args[] )
         if (menu==false)
         {
 
-           if(enemy1.checkCollision())
-            player->vida-=5;
-           if(enemy2.checkCollision())
-            player->vida-=5;
-           if(enemy3.checkCollision())
-            player->vida-=5;
-           if(enemy4.checkCollision())
-            player->vida-=5;
-           if(enemy5.checkCollision())
-            player->vida-=5;
-           if(enemy6.checkCollision())
-            player->vida-=5;
-           if(enemy7.checkCollision())
-            player->vida-=5;
-
-        apply_surface(635,50,vidas_surface,screen);
         background.logic();
-        apply_surface(635,50,vidas_surface,screen);
+        apply_surface(10,10,vidas_surface,screen);
         player->logic();
         enemy1.logic();
         enemy2.logic();
@@ -304,7 +329,7 @@ int main( int argc, char* args[] )
         offset.y = 0;
 
         SDL_Surface * score_surface = TTF_RenderText_Solid( font, toString(score+=5).c_str(), textColor );
-        SDL_BlitSurface( score_surface, NULL, screen, &offset );
+        //SDL_BlitSurface( score_surface, NULL, screen, &offset );
         SDL_Flip( screen );
         SDL_FreeSurface( score_surface );
         SDL_FreeSurface( vidas_surface );
@@ -318,16 +343,15 @@ int main( int argc, char* args[] )
            break;
         }*/
 
-        background.render();
-        player->render();
-        enemy1.render();
-        enemy2.render();
-        enemy3.render();
-        enemy4.render();
-        enemy5.render();
-        enemy6.render();
-        enemy7.render();
-
+            background.render();
+            player->render();
+            enemy1.render();
+            enemy2.render();
+            enemy3.render();
+            enemy4.render();
+            enemy5.render();
+            enemy6.render();
+            enemy7.render();
         }
 
         frameCap();
@@ -365,7 +389,9 @@ int main( int argc, char* args[] )
         SDL_Rect offset;
         offset.x = 0;
         offset.y = 0;
+
         SDL_BlitSurface( game_over, NULL, screen, &offset );
+        Mix_PlayChannel( -1, gameover, 0 );
         frameCap();
 
         //Update the screen
@@ -374,7 +400,6 @@ int main( int argc, char* args[] )
             return 1;
         }
     }
-
 
     clean_up();
 

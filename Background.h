@@ -1,6 +1,6 @@
 #ifndef BACKGROUND_H
 #define BACKGROUND_H
-
+#include "Player.h"
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
 #include "SDL/SDL_ttf.h"

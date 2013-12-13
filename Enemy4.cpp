@@ -32,8 +32,7 @@ Enemy4::~Enemy4()
 
 void Enemy4::logic()
 {
-    if(checkCollision())
-        this->player->vida-=5;
+
 
     x-=5;
     if(x<-100)
@@ -63,5 +62,29 @@ void Enemy4::render()
     current_frame++;
     if(current_frame>2)
         current_frame=0;
+}
+
+int Enemy4::getx()
+{
+   return this->x;
+}
+
+int Enemy4::gety()
+{
+    return this->y;
+}
+
+bool Enemy4::checkCollision()
+{
+ if(
+      (((player->getx()>= this->getx())&& (player->getx()<= this->getx()+10)) ||
+    ((player->getx()+10 >= this->getx())&& (player->getx()+10 <= this->getx()+10))) &&
+    (((player->gety() >= this->gety()) && (player->gety() <= this->gety()+20)) ||
+    ((player->gety()+20 >= this->gety()) && (player->gety()+20 <= this->gety()+20))))
+  {
+   return true;
+  }
+
+  return false;
 }
 

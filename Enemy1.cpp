@@ -2,7 +2,7 @@
 
 Enemy1::Enemy1(SDL_Surface *screen, Player *player)
 {
-    this->player=player;
+//    this->player=player;
     this->screen = screen;
     this->images[0] = IMG_Load( "enemy/1.png" );
     this->images[1] = IMG_Load( "enemy/2.png" );
@@ -24,12 +24,10 @@ Enemy1::~Enemy1()
 
 void Enemy1::logic()
 {
-    if(checkCollision())
-        this->player->vida-=5;
-
     x-=7;
     if(x<-100)
         x=1000;
+
 
  /*  if(y>50)
      y--;
@@ -41,6 +39,16 @@ void Enemy1::logic()
 void Enemy1::jump()
 {
     velocity=-30;
+}
+
+int Enemy1::getx()
+{
+   return this->x;
+}
+
+int Enemy1::gety()
+{
+    return this->y;
 }
 
 void Enemy1::render()
@@ -55,4 +63,18 @@ void Enemy1::render()
     current_frame++;
     if(current_frame>2)
         current_frame=0;
+}
+
+bool Enemy1::checkCollision()
+{
+ if(
+    (((player->getx()>= this->getx())&& (player->getx()<= this->getx()+10)) ||
+    ((player->getx()+10 >= this->getx())&& (player->getx()+10 <= this->getx()+10))) &&
+    (((player->gety() >= this->gety()) && (player->gety() <= this->gety()+20)) ||
+    ((player->gety()+20 >= this->gety()) && (player->gety()+20 <= this->gety()+20))))
+  {
+   return true;
+  }
+
+  return false;
 }

@@ -184,29 +184,32 @@
 1386802602 source:c:\users\affisa-jimmy\documents\progra3\shooter\background.cpp
 	"Background.h"
 
-1386802602 c:\users\affisa-jimmy\documents\progra3\shooter\background.h
+1386968453 c:\users\affisa-jimmy\documents\progra3\shooter\background.h
+	"Player.h"
 	"SDL/SDL.h"
 	"SDL/SDL_image.h"
 	"SDL/SDL_ttf.h"
 	<string>
 
-1386886649 source:c:\users\affisa-jimmy\documents\progra3\shooter\enemy.cpp
+1386970278 source:c:\users\affisa-jimmy\documents\progra3\shooter\enemy.cpp
+	"Player.h"
+	"Bala.h"
+
+1386970266 c:\users\affisa-jimmy\documents\progra3\shooter\enemy.h
+	"SDL/SDL.h"
+	"SDL/SDL_image.h"
+	"SDL/SDL_ttf.h"
+	<string>
 	"Enemy.h"
 	"Player.h"
 
-1386884894 c:\users\affisa-jimmy\documents\progra3\shooter\enemy.h
-	"Player.h"
-	"SDL/SDL.h"
-	"SDL/SDL_image.h"
-	"SDL/SDL_ttf.h"
-	<string>
-
-1386884822 source:c:\users\affisa-jimmy\documents\progra3\shooter\main.cpp
+1386965454 source:c:\users\affisa-jimmy\documents\progra3\shooter\main.cpp
 	"SDL/SDL.h"
 	"SDL/SDL_image.h"
 	"SDL/SDL_mixer.h"
 	"Background.h"
 	"Player.h"
+	"Bala.h"
 	"Enemy.h"
 	"Enemy1.h"
 	"Enemy2.h"
@@ -217,97 +220,106 @@
 	"Enemy7.h"
 	"Timer.h"
 	<string>
+	<vector>
 
-1386876996 c:\users\affisa-jimmy\documents\progra3\shooter\player.h
+1386971644 c:\users\affisa-jimmy\documents\progra3\shooter\player.h
 	"SDL/SDL.h"
 	"SDL/SDL_image.h"
 	"SDL/SDL_ttf.h"
 	<string>
-	"Bala.h"
+	<vector>
 
-1386802602 c:\users\affisa-jimmy\documents\progra3\shooter\bala.h
+1386968453 c:\users\affisa-jimmy\documents\progra3\shooter\bala.h
 	"SDL/SDL.h"
 	"SDL/SDL_image.h"
 	"SDL/SDL_ttf.h"
 	<string>
+	"Player.h"
 	"SDL/SDL_image.h"
 
-1386878198 c:\users\affisa-jimmy\documents\progra3\shooter\enemy1.h
+1386970311 c:\users\affisa-jimmy\documents\progra3\shooter\enemy1.h
+	"Player.h"
 	"Enemy.h"
 
-1386878198 c:\users\affisa-jimmy\documents\progra3\shooter\enemy2.h
-	"SDL/SDL.h"
-	"SDL/SDL_image.h"
-	"SDL/SDL_ttf.h"
-	<string>
-	"Enemy.h"
-
-1386878198 c:\users\affisa-jimmy\documents\progra3\shooter\enemy3.h
+1386970323 c:\users\affisa-jimmy\documents\progra3\shooter\enemy2.h
+	"Player.h"
 	"SDL/SDL.h"
 	"SDL/SDL_image.h"
 	"SDL/SDL_ttf.h"
 	<string>
 	"Enemy.h"
 
-1386878198 c:\users\affisa-jimmy\documents\progra3\shooter\enemy4.h
+1386970354 c:\users\affisa-jimmy\documents\progra3\shooter\enemy3.h
 	"SDL/SDL.h"
 	"SDL/SDL_image.h"
 	"SDL/SDL_ttf.h"
 	<string>
 	"Enemy.h"
+	"Player.h"
 
-1386878198 c:\users\affisa-jimmy\documents\progra3\shooter\enemy5.h
+1386970354 c:\users\affisa-jimmy\documents\progra3\shooter\enemy4.h
 	"SDL/SDL.h"
 	"SDL/SDL_image.h"
 	"SDL/SDL_ttf.h"
 	<string>
 	"Enemy.h"
+	"Player.h"
 
-1386878198 c:\users\affisa-jimmy\documents\progra3\shooter\enemy6.h
+1386970354 c:\users\affisa-jimmy\documents\progra3\shooter\enemy5.h
 	"SDL/SDL.h"
 	"SDL/SDL_image.h"
 	"SDL/SDL_ttf.h"
 	<string>
 	"Enemy.h"
+	"Player.h"
 
-1386878198 c:\users\affisa-jimmy\documents\progra3\shooter\enemy7.h
+1386970354 c:\users\affisa-jimmy\documents\progra3\shooter\enemy6.h
 	"SDL/SDL.h"
 	"SDL/SDL_image.h"
 	"SDL/SDL_ttf.h"
 	<string>
 	"Enemy.h"
+	"Player.h"
+
+1386970354 c:\users\affisa-jimmy\documents\progra3\shooter\enemy7.h
+	"SDL/SDL.h"
+	"SDL/SDL_image.h"
+	"SDL/SDL_ttf.h"
+	<string>
+	"Enemy.h"
+	"Player.h"
 
 1386802602 c:\users\affisa-jimmy\documents\progra3\shooter\timer.h
 	"SDL/SDL.h"
 
-1386877019 source:c:\users\affisa-jimmy\documents\progra3\shooter\player.cpp
+1386964499 source:c:\users\affisa-jimmy\documents\progra3\shooter\player.cpp
 	"Player.h"
 	"Bala.h"
 
 1386802602 source:c:\users\affisa-jimmy\documents\progra3\shooter\timer.cpp
 	"Timer.h"
 
-1386802602 source:c:\users\affisa-jimmy\documents\progra3\shooter\bala.cpp
+1386967073 source:c:\users\affisa-jimmy\documents\progra3\shooter\bala.cpp
 	"Bala.h"
 
-1386886124 source:c:\users\affisa-jimmy\documents\progra3\shooter\enemy1.cpp
+1386970283 source:c:\users\affisa-jimmy\documents\progra3\shooter\enemy1.cpp
 	"Enemy1.h"
 
-1386886108 source:c:\users\affisa-jimmy\documents\progra3\shooter\enemy3.cpp
+1386965598 source:c:\users\affisa-jimmy\documents\progra3\shooter\enemy3.cpp
 	"Enemy3.h"
 
-1386886099 source:c:\users\affisa-jimmy\documents\progra3\shooter\enemy4.cpp
+1386965566 source:c:\users\affisa-jimmy\documents\progra3\shooter\enemy4.cpp
 	"Enemy4.h"
 
-1386886091 source:c:\users\affisa-jimmy\documents\progra3\shooter\enemy5.cpp
+1386965598 source:c:\users\affisa-jimmy\documents\progra3\shooter\enemy5.cpp
 	"Enemy5.h"
 
-1386886125 source:c:\users\affisa-jimmy\documents\progra3\shooter\enemy6.cpp
+1386965598 source:c:\users\affisa-jimmy\documents\progra3\shooter\enemy6.cpp
 	"Enemy6.h"
 
-1386886082 source:c:\users\affisa-jimmy\documents\progra3\shooter\enemy7.cpp
+1386965597 source:c:\users\affisa-jimmy\documents\progra3\shooter\enemy7.cpp
 	"Enemy7.h"
 
-1386886116 source:c:\users\affisa-jimmy\documents\progra3\shooter\enemy2.cpp
+1386965598 source:c:\users\affisa-jimmy\documents\progra3\shooter\enemy2.cpp
 	"Enemy2.h"
 

@@ -30,12 +30,11 @@ Enemy5::~Enemy5()
 
 void Enemy5::logic()
 {
-    if(checkCollision())
-        this->player->vida-=5;
-
     x-=6;
     if(x<-100)
         x=1000;
+
+
 
    /*if(y>50)
      y--;
@@ -50,6 +49,17 @@ void Enemy5::jump()
     velocity=-30;
 }
 
+int Enemy5::getx()
+{
+   return this->x;
+}
+
+int Enemy5::gety()
+{
+    return this->y;
+}
+
+
 void Enemy5::render()
 {
     SDL_Rect offset;
@@ -62,4 +72,19 @@ void Enemy5::render()
     current_frame++;
     if(current_frame>2)
         current_frame=0;
+}
+
+
+bool Enemy5::checkCollision()
+{
+ if(
+      (((player->getx()>= this->getx())&& (player->getx()<= this->getx()+10)) ||
+    ((player->getx()+10 >= this->getx())&& (player->getx()+10 <= this->getx()+10))) &&
+    (((player->gety() >= this->gety()) && (player->gety() <= this->gety()+20)) ||
+    ((player->gety()+20 >= this->gety()) && (player->gety()+20 <= this->gety()+20))))
+  {
+   return true;
+  }
+
+  return false;
 }

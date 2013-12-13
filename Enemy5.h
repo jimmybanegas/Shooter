@@ -5,15 +5,21 @@
 #include "SDL/SDL_ttf.h"
 #include <string>
 #include "Enemy.h"
+#include "Player.h"
 
 class Enemy5 : public Enemy
 {
     public:
         Enemy5(SDL_Surface *screen, Player *player);
+                Player *player;
+
         SDL_Surface *images[6];
         void logic();
         void render();
         void jump();
+        int getx();
+        int gety();
+          bool checkCollision();
         virtual ~Enemy5();
     protected:
     private:

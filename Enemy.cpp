@@ -1,8 +1,9 @@
-#include "Enemy.h"
 #include "Player.h"
+#include "Bala.h"
 
 Enemy::Enemy()
 {
+
   //  this->screen = screen;
     /*this->images[0] = IMG_Load( "enemy/1.png" );
     this->images[1] = IMG_Load( "enemy/2.png" );
@@ -24,9 +25,6 @@ Enemy::~Enemy()
 
 void Enemy::logic()
 {
-    if(checkCollision())
-        this->player->vida-=5;
-
     x-=10;
     if(x<-100)
         x=1000;
@@ -67,21 +65,18 @@ void Enemy::render()
         current_frame=0;
 }
 
-bool Enemy::checkCollision()
+/*bool Enemy::checkCollision()
 {
  if(
-    (((player->getx()>= this->getx())&& (player->getx() <= this->getx()+50)) ||
-    ((player->getx()+50 >= this->getx())&& (player->getx()+50 <= this->getx()+50))) &&
-    (((player->gety() >= this->gety()) && (player->gety() <= this->gety()+100)) ||
-    ((player->gety()+100 >= this->gety()) && (player->gety()+100 <= this->gety()+100))))
+    (((player->getx()>= this->getx())&& (player->getx()<= this->getx()+10)) ||
+    ((player->getx()+10 >= this->getx())&& (player->getx()+10 <= this->getx()+10))) &&
+    (((player->gety() >= this->gety()) && (player->gety() <= this->gety()+20)) ||
+    ((player->gety()+20 >= this->gety()) && (player->gety()+20 <= this->gety()+20))))
   {
    return true;
   }
-  else
-  {
-    return false;
-  }
+
   return false;
-}
+}*/
 
 

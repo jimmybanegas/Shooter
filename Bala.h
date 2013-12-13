@@ -4,7 +4,7 @@
 #include "SDL/SDL_image.h"
 #include "SDL/SDL_ttf.h"
 #include <string>
-
+#include "Player.h"
 #include "SDL/SDL_image.h"
 
 class Bala
@@ -18,11 +18,13 @@ class Bala
         bool exists;
         int x;
         int y;
+        int getx();
+        int gety();
+        SDL_Surface * imagen();
+
+
         SDL_Surface* image;
-        //int speedX;
-        //int speedY;
-      //  int damage;
-       // int flightType;
+
 
 
     protected:

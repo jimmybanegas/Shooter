@@ -32,12 +32,12 @@ Enemy7::~Enemy7()
 
 void Enemy7::logic()
 {
-    if(checkCollision())
-        this->player->vida-=5;
-
     x-=10;
     if(x<-100)
         x=1000;
+
+
+
 
   /* if(y>50)
      y--;
@@ -65,3 +65,29 @@ void Enemy7::render()
     if(current_frame>2)
         current_frame=0;
 }
+
+
+int Enemy7::getx()
+{
+   return this->x;
+}
+
+int Enemy7::gety()
+{
+    return this->y;
+}
+
+bool Enemy7::checkCollision()
+{
+ if(
+     (((player->getx()>= this->getx())&& (player->getx()<= this->getx()+10)) ||
+    ((player->getx()+10 >= this->getx())&& (player->getx()+10 <= this->getx()+10))) &&
+    (((player->gety() >= this->gety()) && (player->gety() <= this->gety()+20)) ||
+    ((player->gety()+20 >= this->gety()) && (player->gety()+20 <= this->gety()+20))))
+  {
+   return true;
+  }
+
+  return false;
+}
+
