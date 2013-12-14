@@ -18,6 +18,8 @@
 #include "Timer.h"
 #include "Player.h"
 
+
+using namespace std;
 //Screen attributes
 const int SCREEN_WIDTH = 1000;
 const int SCREEN_HEIGHT = 500;
@@ -111,6 +113,35 @@ void frameCap()
     update->start();
 }
 
+
+
+/*bool checkCollision(Enemy enemy)
+{
+ if(
+    (((player->getx()>= enemy.getx())&& (player->getx()<= enemy.getx()+10)) ||
+    ((player->getx()+10 >= enemy.getx())&& (player->getx()+10 <= enemy.getx()+10))) &&
+    (((player->gety() >= enemy.gety()) && (player->gety() <= enemy.gety()+20)) ||
+    ((player->gety()+20 >= enemy.gety()) && (player->gety()+20 <= enemy.gety()+20))))
+  {
+   return true;
+  }
+
+  return false;
+}*/
+
+void disparar(vector<Bala*>bullets)
+{
+    if(bullets.size()!=0)
+    {
+        for(int i=0;i<bullets.size();i++){
+        bullets[i]->draw(screen,bullets[i]->x,bullets[i]->y);
+        bullets[i]->x+=6;
+     }
+    }
+
+}
+vector<Bala*>bullets;
+
 int main( int argc, char* args[] )
 {
     //Initialize
@@ -138,6 +169,7 @@ int main( int argc, char* args[] )
     Enemy6 enemy6(screen,player);
     Enemy7 enemy7(screen,player);
 
+
     SDL_Event event;
     //Quit flag
     bool quit = false;
@@ -151,10 +183,11 @@ int main( int argc, char* args[] )
 
     while( quit == false )
     {
-      //  if(menu)
-            // Mix_PlayChannel( -1, tittle, 0 );
-     //   else if(!=menu)
-           //  Mix_PlayChannel( -1, tittle, 0 );
+      /* if(menu)
+             Mix_PlayChannel( -1, tittle, 0 );
+      else if(!=menu)
+           Mix_PlayChannel( -1, tittle, 0 );*/
+
            if(enemy1.checkCollision())
             player->vida-=0.5;
            if(enemy2.checkCollision())
@@ -181,15 +214,14 @@ int main( int argc, char* args[] )
                //If there's an event to handle
         Uint8 *keystates = SDL_GetKeyState( NULL );
 
+
           if( keystates[ SDLK_d ] )
             {
-               player->bullets.push_back(new Bala(player->getx()+10, player->gety()));
+               bullets.push_back(new Bala(player->getx()+10, player->gety()));
                Mix_PlayChannel( -1, shot, 0 );
-
             }
 
-           player->disparar(screen);
-
+     disparar(bullets);
 
         if( SDL_PollEvent( &event ) )
         {

@@ -1,9 +1,7 @@
-#include "Player.h"
-#include "Bala.h"
+#include "Enemy.h"
 
 Enemy::Enemy()
 {
-
   //  this->screen = screen;
     /*this->images[0] = IMG_Load( "enemy/1.png" );
     this->images[1] = IMG_Load( "enemy/2.png" );
@@ -64,19 +62,5 @@ void Enemy::render()
     if(current_frame>2)
         current_frame=0;
 }
-
-/*bool Enemy::checkCollision()
-{
- if(
-    (((player->getx()>= this->getx())&& (player->getx()<= this->getx()+10)) ||
-    ((player->getx()+10 >= this->getx())&& (player->getx()+10 <= this->getx()+10))) &&
-    (((player->gety() >= this->gety()) && (player->gety() <= this->gety()+20)) ||
-    ((player->gety()+20 >= this->gety()) && (player->gety()+20 <= this->gety()+20))))
-  {
-   return true;
-  }
-
-  return false;
-}*/
 
 

@@ -6,6 +6,7 @@
 #include <string>
 #include "Enemy.h"
 #include "Player.h"
+using namespace std;
 
 class Enemy6 : public Enemy
 {

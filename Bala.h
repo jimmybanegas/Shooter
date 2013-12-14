@@ -3,9 +3,13 @@
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
 #include "SDL/SDL_ttf.h"
+#include "SDL/SDL_image.h"
+#include <vector>
 #include <string>
 #include "Player.h"
-#include "SDL/SDL_image.h"
+#include "Enemy.h"
+
+using namespace std;
 
 class Bala
 {

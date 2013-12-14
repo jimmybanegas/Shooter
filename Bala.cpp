@@ -1,5 +1,7 @@
 #include "Bala.h"
 
+
+
 Bala::Bala(int x, int y)
 {
   //  this->screen = screen;

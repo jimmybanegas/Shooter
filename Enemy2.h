@@ -7,6 +7,8 @@
 #include <string>
 #include "Enemy.h"
 
+using namespace std;
+
 class Enemy2 : public Enemy
 {
     public:

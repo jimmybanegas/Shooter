@@ -2,6 +2,7 @@
 #define ENEMY1_H
 #include "Player.h"
 #include "Enemy.h"
+using namespace std;
 
 class Enemy1 : public Enemy
 {
