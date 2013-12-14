@@ -13,7 +13,7 @@ Player::Player(SDL_Surface *screen)
     this->acceleration=2;
     this->velocity=0;
     this->current_frame=0;
-    this->vida=10;
+    this->vida=500;
 }
 
 Player::~Player()

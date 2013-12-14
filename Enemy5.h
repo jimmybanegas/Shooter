@@ -22,6 +22,7 @@ class Enemy5 : public Enemy
         void jump();
         int getx();
         int gety();
+        int getvida();
           bool checkCollision();
         virtual ~Enemy5();
     protected:

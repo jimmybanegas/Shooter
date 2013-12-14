@@ -14,15 +14,17 @@ class Enemy6 : public Enemy
 {
     public:
         Enemy6(SDL_Surface *screen, Player *player);
-                Player *player;
-
+        Player *player;
         SDL_Surface *images[4];
-        void logic(vector<Bala*>bullets);
+        void logic(vector<Bala*>bullets,SDL_Surface *screen, Player *player);
+        vector<Bala*>bullets;
+        void disparar(SDL_Surface *screen);
         void render();
         void jump();
         int getx();
         int gety();
-           bool checkCollision();
+        int getvida();
+        bool checkCollision();
         virtual ~Enemy6();
     protected:
     private:

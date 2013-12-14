@@ -13,7 +13,7 @@ Enemy6::Enemy6(SDL_Surface *screen, Player *player)
     this->acceleration=2;
     this->velocity=0;
     this->current_frame=0;
-    this->vida=10;
+    this->vida=30;
     //ctor
 }
 
@@ -26,7 +26,7 @@ Enemy6::~Enemy6()
 
 }
 
-void Enemy6::logic(vector<Bala*>bullets)
+void Enemy6::logic(vector<Bala*>bullets, SDL_Surface *screen, Player *player)
 {
    for(int x=0;x<bullets.size();x++)
    {
@@ -39,9 +39,22 @@ void Enemy6::logic(vector<Bala*>bullets)
     }
    }
 
+   for(int x=0;x<this->bullets.size();x++)
+   {
+     if((((this->bullets[x]->getx()>= player->getx())&& (this->bullets[x]->getx()<= player->getx()+10)) ||
+        ((this->bullets[x]->getx()+10 >= player->getx())&& (this->bullets[x]->getx()+10 <= player->getx()+10))) &&
+        (((this->bullets[x]->gety() >= player->gety()) && (this->bullets[x]->gety() <= player->gety()+20)) ||
+        ((this->bullets[x]->gety()+20 >= player->gety()) && (this->bullets[x]->gety()+20 <= player->gety()+20))))
+    {
+      player->vida-=0.5;
+    }
+   }
+
     x-=8;
     if(x<-100)
         x=1000;
+
+    disparar(screen);
 
 }
 
@@ -76,6 +89,12 @@ int Enemy6::gety()
     return this->y;
 }
 
+int Enemy6::getvida()
+{
+    return this->vida;
+}
+
+
 bool Enemy6::checkCollision()
 {
  if(
@@ -88,4 +107,13 @@ bool Enemy6::checkCollision()
   }
 
   return false;
+}
+
+void Enemy6::disparar(SDL_Surface * screen)
+{
+   for(int i=0;i<bullets.size();i++){
+    bullets[i]->draw(screen,bullets[i]->x,bullets[i]->y);
+    bullets[i]->x-=50;
+    bullets[i]->y-=50;
+   }
 }

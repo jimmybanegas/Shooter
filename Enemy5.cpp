@@ -14,7 +14,7 @@ Enemy5::Enemy5(SDL_Surface *screen, Player *player)
     this->acceleration=2;
     this->velocity=0;
     this->current_frame=0;
-    this->vida=10;
+    this->vida=30;
     //ctor
 }
 
@@ -61,6 +61,11 @@ int Enemy5::getx()
 int Enemy5::gety()
 {
     return this->y;
+}
+
+int Enemy5::getvida()
+{
+    return this->vida;
 }
 
 

@@ -15,7 +15,7 @@ Enemy7::Enemy7(SDL_Surface *screen, Player *player)
     this->acceleration=2;
     this->velocity=0;
     this->current_frame=0;
-    this->vida=10;
+    this->vida=30;
     //ctor
 }
 
@@ -81,6 +81,12 @@ int Enemy7::gety()
 {
     return this->y;
 }
+
+int Enemy7::getvida()
+{
+    return this->vida;
+}
+
 
 bool Enemy7::checkCollision()
 {

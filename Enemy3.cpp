@@ -15,7 +15,7 @@ Enemy3::Enemy3(SDL_Surface *screen, Player *player)
     this->acceleration=2;
     this->velocity=0;
     this->current_frame=0;
-    this->vida=10;
+    this->vida=30;
     //ctor
 }
 
@@ -48,10 +48,6 @@ void Enemy3::logic(vector<Bala*>bullets)
         x=1000;
 
 
-    /* y--;
-   else
-      y=400;*/
-
 }
 
 void Enemy3::jump()
@@ -68,6 +64,12 @@ int Enemy3::gety()
 {
     return this->y;
 }
+
+int Enemy3::getvida()
+{
+    return this->vida;
+}
+
 
 void Enemy3::render()
 {

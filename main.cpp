@@ -112,29 +112,6 @@ void frameCap()
     update->start();
 }
 
-/*void checkcollision(Enemy enemy, Bala *bullet)
-{
-     if((((enemy.getx()>=bullet->getx())&& (enemy.getx()<= bullet->getx()+10)) ||
-        ((enemy.getx()+10 >= bullet->getx())&& (enemy.getx()+10 <= bullet->getx()+10))) &&
-        (((enemy.gety() >= bullet->gety()) && (enemy.gety() <= bullet->gety()+20)) ||
-        ((enemy.gety()+20 >= bullet->gety()) && (enemy.gety()+20 <= bullet->gety()+20))))
-     {
-       enemy.vida-=5;
-     }
-}*/
-
-/*void disparar(vector<Bala*>bullets)
-{
-    if(bullets.size()!=0)
-    {
-        for(int i=0;i<bullets.size();i++){
-            bullets[i]->draw(screen,bullets[i]->x,bullets[i]->y);
-            bullets[i]->x+=6;
-          //  checkcollision()
-        }
-    }
-}*/
-
 vector<Bala*>bullets;
 
 int main( int argc, char* args[] )
@@ -144,6 +121,7 @@ int main( int argc, char* args[] )
     update=new Timer();
     update->start();
     SDL_Surface * game_over = IMG_Load( "game_over.png" );
+    SDL_Surface * game_win = IMG_Load( "youwin.png" );
 
     TTF_Font *font = TTF_OpenFont( "lazy.ttf", 30 );
     SDL_Color textColor = { 255, 255, 255 };
@@ -156,13 +134,13 @@ int main( int argc, char* args[] )
 
     Background background(screen);
     Player *player=new Player(screen);
-    Enemy1 enemy1(screen,player);
-    Enemy2 enemy2(screen,player);
-    Enemy3 enemy3(screen,player);
-    Enemy4 enemy4(screen,player);
-    Enemy5 enemy5(screen,player);
-    Enemy6 enemy6(screen,player);
-    Enemy7 enemy7(screen,player);
+    Enemy1 *enemy1=new Enemy1(screen,player);
+    Enemy2 *enemy2=new Enemy2(screen,player);
+    Enemy3 *enemy3=new Enemy3(screen,player);
+    Enemy4 *enemy4=new Enemy4(screen,player);
+    Enemy5 *enemy5=new Enemy5(screen,player);
+    Enemy6 *enemy6=new Enemy6(screen,player);
+    Enemy7 *enemy7=new Enemy7(screen,player);
 
 
     SDL_Event event;
@@ -178,29 +156,75 @@ int main( int argc, char* args[] )
 
     while( quit == false )
     {
-      /* if(menu)
-             Mix_PlayChannel( -1, tittle, 0 );
-      else if(!=menu)
-           Mix_PlayChannel( -1, tittle, 0 );*/
+      if(menu)
+             //Mix_PlayChannel( -1, tittle, 0 );
 
-           if(enemy1.checkCollision())
-            player->vida-=0.5;
-           if(enemy2.checkCollision())
-            player->vida-=0.5;
-           if(enemy3.checkCollision())
-            player->vida-=0.5;
-           if(enemy4.checkCollision())
-            player->vida-=0.5;
-           if(enemy5.checkCollision())
-            player->vida-=0.5;
-           if(enemy6.checkCollision())
-            player->vida-=0.5;
-           if(enemy7.checkCollision())
-            player->vida-=0.5;
+
+           if(enemy1->checkCollision())
+           {
+               if(enemy1->getvida()>0)
+               {
+                Mix_PlayChannel( -1, jump, 0 );
+                player->vida-=0.5;
+               }
+
+           }
+           if(enemy2->checkCollision())
+           {
+              if(enemy2->getvida()>0)
+               {
+                Mix_PlayChannel( -1, jump, 0 );
+                player->vida-=0.5;
+               }
+           }
+           if(enemy3->checkCollision())
+           {
+             if(enemy3->getvida()>0)
+               {
+                Mix_PlayChannel( -1, jump, 0 );
+                player->vida-=0.5;
+               }
+           }
+           if(enemy4->checkCollision())
+            {
+               if(enemy4->getvida()>0)
+               {
+                Mix_PlayChannel( -1, jump, 0 );
+                player->vida-=0.5;
+               }
+            }
+           if(enemy5->checkCollision())
+           {
+             if(enemy5->getvida()>0)
+               {
+                Mix_PlayChannel( -1, jump, 0 );
+                player->vida-=0.5;
+               }
+           }
+           if(enemy6->checkCollision())
+           {
+              if(enemy6->getvida()>0)
+               {
+                Mix_PlayChannel( -1, jump, 0 );
+                player->vida-=0.5;
+               }
+           }
+           if(enemy7->checkCollision())
+           {
+              if(enemy7->getvida()>0)
+               {
+                Mix_PlayChannel( -1, jump, 0 );
+                player->vida-=0.5;
+               }
+           }
+
+           if(enemy1->getvida()<=0&&enemy2->getvida()<=0&&enemy3->getvida()<=0&&enemy4->getvida()<=0&&enemy5->getvida()<=0&&enemy6->getvida()<=0&&enemy7->getvida()<=0)
+                break;
 
         SDL_Rect offset;
         offset.x = 0;
         offset.y = 0;
+
         if(player->vida==0)
            break;
 
@@ -216,13 +240,27 @@ int main( int argc, char* args[] )
                Mix_PlayChannel( -1, shot, 0 );
             }
 
-    if(bullets.size()!=0)
-    {
-        for(int i=0;i<bullets.size();i++){
-            bullets[i]->draw(screen,bullets[i]->x,bullets[i]->y);
-            bullets[i]->x+=15;
+              if(enemy2->getvida()>0)
+              {
+                enemy2->bullets.push_back(new Bala(enemy2->getx()+10, enemy2->gety()));
+              }
+              if(enemy4->getvida()>0)
+              {
+                enemy4->bullets.push_back(new Bala(enemy4->getx()+10, enemy4->gety()));
+              }
+              if(enemy6->getvida()>0)
+              {
+                enemy6->bullets.push_back(new Bala(enemy6->getx()+10, enemy6->gety()));
+              }
+
+        if(bullets.size()!=0)
+        {
+            for(int i=0;i<bullets.size();i++){
+                bullets[i]->draw(screen,bullets[i]->x,bullets[i]->y);
+                bullets[i]->x+=15;
+            }
         }
-    }
+
         if( SDL_PollEvent( &event ) )
         {
             //If a key was pressed
@@ -258,21 +296,7 @@ int main( int argc, char* args[] )
                     case SDLK_RIGHT:
                          player->x+=20;
                     break;
-                    case SDLK_SPACE:
-                        player->jump();
-                        //Mix_PlayChannel( -1, jump, 0 );
-                    break;
-                    case SDLK_d:
 
-                        //  Mix_PlayChannel( -1, shot, 0 );
-                    break;
-                      //  player.disparar(screen);
-
-                        //  Mix_PlayChannel( -1, jump, 0 );
-                 //   break;
-
-                    /*default:
-                        break;*/
                   }
             }
             else if( event.type == SDL_QUIT )
@@ -348,13 +372,13 @@ int main( int argc, char* args[] )
         background.logic();
         apply_surface(10,10,vidas_surface,screen);
         player->logic();
-        enemy1.logic(bullets);
-        enemy2.logic(bullets);
-        enemy3.logic(bullets);
-        enemy4.logic(bullets);
-        enemy5.logic(bullets);
-        enemy6.logic(bullets);
-        enemy7.logic(bullets);
+        enemy1->logic(bullets);
+        enemy2->logic(bullets, screen,player);
+        enemy3->logic(bullets);
+        enemy4->logic(bullets, screen, player);
+        enemy5->logic(bullets);
+        enemy6->logic(bullets, screen, player);
+        enemy7->logic(bullets);
 
         SDL_Rect offset;
         offset.x = 0;
@@ -366,24 +390,15 @@ int main( int argc, char* args[] )
         SDL_FreeSurface( score_surface );
         SDL_FreeSurface( vidas_surface );
 
-       /* if(player.x-enemy.x<50
-           && player.x-enemy.x>-50
-           && player.y-enemy.y<50
-           && player.y-enemy.y>-50
-           )
-        {
-           break;
-        }*/
-
             background.render();
             player->render();
-            enemy1.render();
-            enemy2.render();
-            enemy3.render();
-            enemy4.render();
-            enemy5.render();
-            enemy6.render();
-            enemy7.render();
+            enemy1->render();
+            enemy2->render();
+            enemy3->render();
+            enemy4->render();
+            enemy5->render();
+            enemy6->render();
+            enemy7->render();
         }
 
         frameCap();
@@ -422,8 +437,17 @@ int main( int argc, char* args[] )
         offset.x = 0;
         offset.y = 0;
 
-        SDL_BlitSurface( game_over, NULL, screen, &offset );
-        Mix_PlayChannel( -1, gameover, 0 );
+        if(enemy1->vida<=0&&enemy2->vida<=0&&enemy3->vida<=0&&enemy4->vida<=0&&enemy5->vida<=0&&enemy6->vida<=0&&enemy7->vida<=0)
+        {
+            SDL_BlitSurface( game_win, NULL, screen, &offset );
+            Mix_PlayChannel( -1, gameover, 0 );
+        }
+        else if(player->vida==0)
+        {
+          SDL_BlitSurface( game_over, NULL, screen, &offset );
+          Mix_PlayChannel( -1, gameover, 0 );
+        }
+
         frameCap();
 
         //Update the screen

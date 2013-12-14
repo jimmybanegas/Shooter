@@ -17,7 +17,7 @@ class Enemy1 : public Enemy
         int getx();
         int gety();
         bool checkCollision();
-
+        int getvida();
         virtual ~Enemy1();
     protected:
     private:
