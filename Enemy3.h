@@ -6,16 +6,17 @@
 #include <string>
 #include "Enemy.h"
 #include "Player.h"
+#include "Bala.h"
 
 using namespace std;
 class Enemy3 : public Enemy
 {
     public:
         Enemy3(SDL_Surface *screen, Player *player);
-                Player *player;
+        Player *player;
 
         SDL_Surface *images[6];
-        void logic();
+        void logic(vector<Bala*>bullets);
         void render();
         void jump();
         int getx();

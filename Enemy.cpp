@@ -56,6 +56,7 @@ void Enemy::render()
     offset.x = x - images[current_frame]->w/2;
     offset.y = y - images[current_frame]->h/2;
 
+   if(vida>0)
     SDL_BlitSurface( images[current_frame], NULL, screen, &offset );
 
     current_frame++;

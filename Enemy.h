@@ -24,6 +24,7 @@ public:
     int current_frame;
     SDL_Surface *images[3];
     SDL_Surface *screen;
+    int vida;
 
     //Player *player;
     virtual int getx();

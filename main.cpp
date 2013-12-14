@@ -18,7 +18,6 @@
 #include "Timer.h"
 #include "Player.h"
 
-
 using namespace std;
 //Screen attributes
 const int SCREEN_WIDTH = 1000;
@@ -113,33 +112,29 @@ void frameCap()
     update->start();
 }
 
-
-
-/*bool checkCollision(Enemy enemy)
+/*void checkcollision(Enemy enemy, Bala *bullet)
 {
- if(
-    (((player->getx()>= enemy.getx())&& (player->getx()<= enemy.getx()+10)) ||
-    ((player->getx()+10 >= enemy.getx())&& (player->getx()+10 <= enemy.getx()+10))) &&
-    (((player->gety() >= enemy.gety()) && (player->gety() <= enemy.gety()+20)) ||
-    ((player->gety()+20 >= enemy.gety()) && (player->gety()+20 <= enemy.gety()+20))))
-  {
-   return true;
-  }
-
-  return false;
+     if((((enemy.getx()>=bullet->getx())&& (enemy.getx()<= bullet->getx()+10)) ||
+        ((enemy.getx()+10 >= bullet->getx())&& (enemy.getx()+10 <= bullet->getx()+10))) &&
+        (((enemy.gety() >= bullet->gety()) && (enemy.gety() <= bullet->gety()+20)) ||
+        ((enemy.gety()+20 >= bullet->gety()) && (enemy.gety()+20 <= bullet->gety()+20))))
+     {
+       enemy.vida-=5;
+     }
 }*/
 
-void disparar(vector<Bala*>bullets)
+/*void disparar(vector<Bala*>bullets)
 {
     if(bullets.size()!=0)
     {
         for(int i=0;i<bullets.size();i++){
-        bullets[i]->draw(screen,bullets[i]->x,bullets[i]->y);
-        bullets[i]->x+=6;
-     }
+            bullets[i]->draw(screen,bullets[i]->x,bullets[i]->y);
+            bullets[i]->x+=6;
+          //  checkcollision()
+        }
     }
+}*/
 
-}
 vector<Bala*>bullets;
 
 int main( int argc, char* args[] )
@@ -221,8 +216,13 @@ int main( int argc, char* args[] )
                Mix_PlayChannel( -1, shot, 0 );
             }
 
-     disparar(bullets);
-
+    if(bullets.size()!=0)
+    {
+        for(int i=0;i<bullets.size();i++){
+            bullets[i]->draw(screen,bullets[i]->x,bullets[i]->y);
+            bullets[i]->x+=15;
+        }
+    }
         if( SDL_PollEvent( &event ) )
         {
             //If a key was pressed
@@ -348,13 +348,13 @@ int main( int argc, char* args[] )
         background.logic();
         apply_surface(10,10,vidas_surface,screen);
         player->logic();
-        enemy1.logic();
-        enemy2.logic();
-        enemy3.logic();
-        enemy4.logic();
-        enemy5.logic();
-        enemy6.logic();
-        enemy7.logic();
+        enemy1.logic(bullets);
+        enemy2.logic(bullets);
+        enemy3.logic(bullets);
+        enemy4.logic(bullets);
+        enemy5.logic(bullets);
+        enemy6.logic(bullets);
+        enemy7.logic(bullets);
 
         SDL_Rect offset;
         offset.x = 0;

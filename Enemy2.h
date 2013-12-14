@@ -6,6 +6,7 @@
 #include "SDL/SDL_ttf.h"
 #include <string>
 #include "Enemy.h"
+#include "Bala.h"
 
 using namespace std;
 
@@ -13,10 +14,9 @@ class Enemy2 : public Enemy
 {
     public:
         Enemy2(SDL_Surface *screen, Player *player);
-                Player *player;
-
+        Player *player;
         SDL_Surface *images[2];
-        void logic();
+        void logic(vector<Bala*>bullets);
         void render();
         void jump();
         int getx();

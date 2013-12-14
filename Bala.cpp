@@ -49,4 +49,22 @@ void Bala::draw(SDL_Surface* screen,int x,int y) {
 
 }
 
+/*bool Bala:: checkcollision(Player *player)
+{
+    if(
+    (((player->getx()>= this->getx())&& (player->getx()<= this->getx()+10)) ||
+    ((player->getx()+10 >= this->getx())&& (player->getx()+10 <= this->getx()+10))) &&
+    (((player->gety() >= this->gety()) && (player->gety() <= this->gety()+20)) ||
+    ((player->gety()+20 >= this->gety()) && (player->gety()+20 <= this->gety()+20))))
+  {
+   return true;
+  }
 
+  return false;
+}
+
+bool Bala:: checkcollision2(Enemy enemy)
+{
+
+}
+*/

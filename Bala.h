@@ -25,11 +25,9 @@ class Bala
         int getx();
         int gety();
         SDL_Surface * imagen();
-
-
+      //  bool checkcollision(Player *player);
+       // bool checkcollision2(Enemy enemy);
         SDL_Surface* image;
-
-
 
     protected:
     private:
