@@ -36,6 +36,7 @@ void Enemy6::logic(vector<Bala*>bullets, SDL_Surface *screen, Player *player)
         ((bullets[x]->gety()+20 >= this->gety()) && (bullets[x]->gety()+20 <= this->gety()+20))))
     {
       this->vida-=5;
+      player->score+=5;
     }
    }
 

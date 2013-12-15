@@ -27,8 +27,6 @@ Enemy7::~Enemy7()
     SDL_FreeSurface( images[3] );
     SDL_FreeSurface( images[4] );
     SDL_FreeSurface( images[5] );
-
-
 }
 
 void Enemy7::logic(vector<Bala*>bullets)
@@ -41,6 +39,7 @@ void Enemy7::logic(vector<Bala*>bullets)
         ((bullets[x]->gety()+20 >= this->gety()) && (bullets[x]->gety()+20 <= this->gety()+20))))
     {
       this->vida-=5;
+      player->score+=5;
     }
    }
 

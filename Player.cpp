@@ -14,6 +14,7 @@ Player::Player(SDL_Surface *screen)
     this->velocity=0;
     this->current_frame=0;
     this->vida=500;
+    this->score=1;
 }
 
 Player::~Player()
@@ -63,7 +64,6 @@ int Player::getx()
  {
      return this->y;
  }
-
 
 void Player::render()
 {

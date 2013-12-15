@@ -40,6 +40,7 @@ void Enemy3::logic(vector<Bala*>bullets)
         ((bullets[x]->gety()+20 >= this->gety()) && (bullets[x]->gety()+20 <= this->gety()+20))))
     {
       this->vida-=5;
+      player->score+=5;
     }
    }
 

@@ -32,6 +32,7 @@ void Enemy2::logic(vector<Bala*>bullets, SDL_Surface *screen, Player *player)
         ((bullets[x]->gety()+20 >= this->gety()) && (bullets[x]->gety()+20 <= this->gety()+20))))
     {
       this->vida-=5;
+      player->score+=5;
     }
    }
 
@@ -94,7 +95,7 @@ void Enemy2::render()
 bool Enemy2::checkCollision()
 {
  if(
-      (((player->getx()>= this->getx())&& (player->getx()<= this->getx()+10)) ||
+    (((player->getx()>= this->getx())&& (player->getx()<= this->getx()+10)) ||
     ((player->getx()+10 >= this->getx())&& (player->getx()+10 <= this->getx()+10))) &&
     (((player->gety() >= this->gety()) && (player->gety() <= this->gety()+20)) ||
     ((player->gety()+20 >= this->gety()) && (player->gety()+20 <= this->gety()+20))))

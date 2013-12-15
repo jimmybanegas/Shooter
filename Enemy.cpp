@@ -2,15 +2,7 @@
 
 Enemy::Enemy()
 {
-  //  this->screen = screen;
-    /*this->images[0] = IMG_Load( "enemy/1.png" );
-    this->images[1] = IMG_Load( "enemy/2.png" );
-    this->images[2] = IMG_Load( "enemy/3.png" );
-    this->x = 1000;
-    this->y = 400;
-    this->acceleration=2;
-    this->velocity=0;
-    this->current_frame=0;*/
+
 }
 
 Enemy::~Enemy()
@@ -26,12 +18,6 @@ void Enemy::logic()
     x-=10;
     if(x<-100)
         x=1000;
-
- /*  if(y>50)
-     y--;
-   else
-      y=400;*/
-
 }
 
 void Enemy::jump()

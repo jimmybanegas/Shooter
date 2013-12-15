@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 #include "Background.h"
-
+#include <fstream>
 #include "Bala.h"
 #include "Enemy.h"
 #include "Enemy1.h"
@@ -43,6 +43,14 @@ std::string toString(int number)
     for (int i=0;i<(int)temp.length();i++)
         returnvalue+=temp[temp.length()-i-1];
     return returnvalue;
+}
+
+void agregarScore(int puntos)
+{
+    ofstream out("score.txt", ios::app);
+    out<<puntos<<endl;
+    out.close();
+
 }
 
 void apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip = NULL )
@@ -123,11 +131,11 @@ int main( int argc, char* args[] )
     update=new Timer();
     update->start();
     SDL_Surface * game_over = IMG_Load( "game_over.png" );
+    SDL_Surface * backg = IMG_Load( "background.png" );
     SDL_Surface * game_win = IMG_Load( "youwin.png" );
 
     TTF_Font *font = TTF_OpenFont( "lazy.ttf", 30 );
     SDL_Color textColor = { 255, 255, 255 };
-    SDL_Surface * score_surface = NULL;
 
     Mix_Chunk *jump = Mix_LoadWAV( "jump.ogg" );
     Mix_Chunk *shot = Mix_LoadWAV( "laser-pink.ogg" );
@@ -148,7 +156,6 @@ int main( int argc, char* args[] )
     SDL_Event event;
     //Quit flag
     bool quit = false;
-    int score=0;
     SDL_Surface* opciones_de_juego = IMG_Load("menu/menu.png");
     SDL_Surface* instrucciones = IMG_Load("menu/instrucciones.png");
     SDL_Surface* cursor_opciones = IMG_Load("menu/cursor_menu.png");
@@ -160,7 +167,6 @@ int main( int argc, char* args[] )
     {
       if(menu)
              //Mix_PlayChannel( -1, tittle, 0 );
-
 
            if(enemy1->checkCollision())
            {
@@ -231,6 +237,7 @@ int main( int argc, char* args[] )
            break;
 
         SDL_Surface * vidas_surface = TTF_RenderText_Solid( font, toString(player->vida).c_str(), textColor );
+        SDL_Surface * score_surface = TTF_RenderText_Solid( font, toString(player->score).c_str(), textColor );
 
                //If there's an event to handle
         Uint8 *keystates = SDL_GetKeyState( NULL );
@@ -313,51 +320,47 @@ int main( int argc, char* args[] )
             apply_surface(0,0,opciones_de_juego,screen);
             apply_surface((cursor_opciones_x*219),cursor_opciones_y,cursor_opciones,screen);
 
-              if( SDL_PollEvent( &event ) )
+            if( keystates[ SDLK_ESCAPE ] )
             {
-
-            //If a key was pressed
-            if( event.type == SDL_KEYDOWN )
-            {
-
-                //Set the proper message surface
-                switch( event.key.keysym.sym )
-                {
-                    case SDLK_ESCAPE: quit = true; break;
-                    case SDLK_UP:
-                          cursor_opciones_y-=70;
-                    break;
-                    case SDLK_DOWN:
-                          cursor_opciones_y+=70;
-                    break;
-                    case SDLK_RETURN:
-                          if(cursor_opciones_y==200)
-                          {
-                            menu=false;
-                            //break;
-                          }
-                          else if(cursor_opciones_y==270)
-                          {
-                             // SDL_FreeSurface( screen );
-                              apply_surface(0,0,instrucciones,screen);
-                             /* SDL_Delay(5000);
-                              apply_surface(0,0,opciones_de_juego,screen);*/
-
-                          }
-                          else if(cursor_opciones_y==340)
-                            quit=true;
-                          else if(cursor_opciones_y==410)
-                            quit=true;
-                        break;
-                  }
+              quit=true;
             }
-            //If the user has Xed out the window
-            else if( event.type == SDL_QUIT )
+            if( keystates[ SDLK_UP ] )
             {
-                //Quit the program
-                quit = true;
+              cursor_opciones_y-=70;
             }
-        }
+            if( keystates[ SDLK_DOWN ] )
+            {
+              cursor_opciones_y+=70;
+            }
+            if( keystates[ SDLK_RETURN ] && cursor_opciones_y==200)
+            {
+             menu=false;
+            }
+            if( keystates[ SDLK_RETURN ] && cursor_opciones_y==270)
+            {
+             apply_surface(700,0,instrucciones,screen);
+            }
+            if( keystates[ SDLK_RETURN ] && cursor_opciones_y==340)
+            {
+                  ifstream in ("score.txt");
+
+                  int maxi =-9999;
+
+                   while(!in.eof())
+                   {
+                       int puntos;
+                       in>>puntos;
+                        if(maxi<puntos)
+                            maxi=puntos;
+                   }
+                printf("|%6d|\n", maxi);
+                SDL_Surface * maxim = TTF_RenderText_Solid( font, toString(maxi).c_str(), textColor );
+                apply_surface(800,250,maxim,screen);
+            }
+            if( keystates[ SDLK_RETURN ] && cursor_opciones_y==410)
+            {
+             quit=true;
+            }
 
         }
         if (menu==false)
@@ -365,7 +368,7 @@ int main( int argc, char* args[] )
 
         background.logic();
         apply_surface(10,10,vidas_surface,screen);
-        apply_surface(10,10,score_surface,screen);
+        apply_surface(950,10,score_surface,screen);
         player->logic();
         enemy1->logic(bullets);
         enemy2->logic(bullets, screen,player);
@@ -381,7 +384,6 @@ int main( int argc, char* args[] )
 
 
         SDL_Flip( screen );
-        //SDL_FreeSurface( score );
         SDL_FreeSurface( vidas_surface );
 
             background.render();
@@ -441,6 +443,11 @@ int main( int argc, char* args[] )
           SDL_BlitSurface( game_over, NULL, screen, &offset );
           Mix_PlayChannel( -1, gameover, 0 );
         }
+        else
+        {
+           SDL_BlitSurface( backg, NULL, screen, &offset );
+        }
+
 
         frameCap();
 
@@ -450,7 +457,7 @@ int main( int argc, char* args[] )
             return 1;
         }
     }
-
+    agregarScore(player->score);
     clean_up();
 
     return 0;
