@@ -100,8 +100,7 @@ int Enemy4::getvida()
 
 bool Enemy4::checkCollision()
 {
- if(
-      (((player->getx()>= this->getx())&& (player->getx()<= this->getx()+10)) ||
+ if((((player->getx()>= this->getx())&& (player->getx()<= this->getx()+10)) ||
     ((player->getx()+10 >= this->getx())&& (player->getx()+10 <= this->getx()+10))) &&
     (((player->gety() >= this->gety()) && (player->gety() <= this->gety()+20)) ||
     ((player->gety()+20 >= this->gety()) && (player->gety()+20 <= this->gety()+20))))
@@ -116,6 +115,10 @@ void Enemy4::disparar(SDL_Surface * screen)
 {
    for(int i=0;i<bullets.size();i++){
     bullets[i]->draw(screen,bullets[i]->x,bullets[i]->y);
-    bullets[i]->x-=50;
+    if(i%2==0)
+    {
+       bullets[i]->y-=20;
+    }
+      bullets[i]->x-=50;
    }
 }

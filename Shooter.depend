@@ -75,7 +75,7 @@
 	"Player.h"
 	"Bala.h"
 
-1387063555 source:c:\users\auditor3\documents\progra3\shooter\main.cpp
+1387068766 source:c:\users\auditor3\documents\progra3\shooter\main.cpp
 	"SDL/SDL.h"
 	"SDL/SDL_image.h"
 	"SDL/SDL_mixer.h"
@@ -93,6 +93,7 @@
 	"Enemy7.h"
 	"Timer.h"
 	"Player.h"
+	"Bala2.h"
 
 1387041734 c:\users\auditor3\documents\progra3\shooter\player.h
 	"SDL/SDL.h"
@@ -182,10 +183,10 @@
 	"Player.h"
 	"Bala.h"
 
-1387053396 source:c:\users\auditor3\documents\progra3\shooter\enemy6.cpp
+1387068989 source:c:\users\auditor3\documents\progra3\shooter\enemy6.cpp
 	"Enemy6.h"
 
-1387063448 c:\users\auditor3\documents\progra3\shooter\enemy6.h
+1387065612 c:\users\auditor3\documents\progra3\shooter\enemy6.h
 	"SDL/SDL.h"
 	"SDL/SDL_image.h"
 	"SDL/SDL_ttf.h"
@@ -193,6 +194,7 @@
 	"Enemy.h"
 	"Player.h"
 	"Bala.h"
+	"Bala2.h"
 
 1387053411 source:c:\users\auditor3\documents\progra3\shooter\enemy7.cpp
 	"Enemy7.h"
@@ -347,4 +349,10 @@
 
 1386965598 source:c:\users\affisa-jimmy\documents\progra3\shooter\enemy2.cpp
 	"Enemy2.h"
+
+1387065880 source:c:\users\auditor3\documents\progra3\shooter\bala2.cpp
+	"Bala2.h"
+
+1387065315 c:\users\auditor3\documents\progra3\shooter\bala2.h
+	"Bala.h"
 

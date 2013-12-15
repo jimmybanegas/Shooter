@@ -7,6 +7,7 @@
 #include "Enemy.h"
 #include "Player.h"
 #include "Bala.h"
+#include "Bala2.h"
 
 using namespace std;
 
@@ -17,7 +18,7 @@ class Enemy6 : public Enemy
         Player *player;
         SDL_Surface *images[4];
         void logic(vector<Bala*>bullets,SDL_Surface *screen, Player *player);
-        vector<Bala*>bullets;
+        vector<Bala2*>bullets;
         void disparar(SDL_Surface *screen);
         void render();
         void jump();

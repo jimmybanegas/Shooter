@@ -17,6 +17,7 @@
 #include "Enemy7.h"
 #include "Timer.h"
 #include "Player.h"
+#include "Bala2.h"
 
 using namespace std;
 //Screen attributes
@@ -26,6 +27,7 @@ const int SCREEN_BPP = 32;
 
 SDL_Surface *screen = NULL;
 Timer* update;
+
 
 std::string toString(int number)
 {
@@ -250,7 +252,7 @@ int main( int argc, char* args[] )
               }
               if(enemy6->getvida()>0)
               {
-                enemy6->bullets.push_back(new Bala(enemy6->getx()+10, enemy6->gety()));
+                enemy6->bullets.push_back(new Bala2(enemy6->getx(), enemy6->gety()-20));
               }
 
         if(bullets.size()!=0)
@@ -317,10 +319,6 @@ int main( int argc, char* args[] )
             //If a key was pressed
             if( event.type == SDL_KEYDOWN )
             {
-                 /* if(cursor_opciones_y>200)
-                            cursor_opciones_y=200;
-                  if(cursor_opciones_y>410)
-                            cursor_opciones_y=410;*/
 
                 //Set the proper message surface
                 switch( event.key.keysym.sym )
@@ -342,13 +340,9 @@ int main( int argc, char* args[] )
                           {
                              // SDL_FreeSurface( screen );
                               apply_surface(0,0,instrucciones,screen);
-                            //  SDL_Delay(5000);
+                             /* SDL_Delay(5000);
+                              apply_surface(0,0,opciones_de_juego,screen);*/
 
-                                switch( event.key.keysym.sym )
-                                {
-                                   case SDLK_RETURN:
-                                       break;
-                                }
                           }
                           else if(cursor_opciones_y==340)
                             quit=true;
@@ -371,6 +365,7 @@ int main( int argc, char* args[] )
 
         background.logic();
         apply_surface(10,10,vidas_surface,screen);
+        apply_surface(10,10,score_surface,screen);
         player->logic();
         enemy1->logic(bullets);
         enemy2->logic(bullets, screen,player);
@@ -384,10 +379,9 @@ int main( int argc, char* args[] )
         offset.x = 0;
         offset.y = 0;
 
-        SDL_Surface * score_surface = TTF_RenderText_Solid( font, toString(score+=5).c_str(), textColor );
-        //SDL_BlitSurface( score_surface, NULL, screen, &offset );
+
         SDL_Flip( screen );
-        SDL_FreeSurface( score_surface );
+        //SDL_FreeSurface( score );
         SDL_FreeSurface( vidas_surface );
 
             background.render();

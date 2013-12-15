@@ -113,7 +113,14 @@ void Enemy6::disparar(SDL_Surface * screen)
 {
    for(int i=0;i<bullets.size();i++){
     bullets[i]->draw(screen,bullets[i]->x,bullets[i]->y);
-    bullets[i]->x-=50;
+    if(i%2==0)
+    {
+       bullets[i]->x-=30;
+       bullets[i]->y-=10;
+    }
+    bullets[i]->x-=10;
     bullets[i]->y-=50;
+
+
    }
 }
