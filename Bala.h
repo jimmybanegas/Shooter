@@ -3,9 +3,13 @@
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
 #include "SDL/SDL_ttf.h"
+#include "SDL/SDL_image.h"
+#include <vector>
 #include <string>
 #include "Player.h"
-#include "SDL/SDL_image.h"
+#include "Enemy.h"
+
+using namespace std;
 
 class Bala
 {
@@ -21,11 +25,9 @@ class Bala
         int getx();
         int gety();
         SDL_Surface * imagen();
-
-
+      //  bool checkcollision(Player *player);
+       // bool checkcollision2(Enemy enemy);
         SDL_Surface* image;
-
-
 
     protected:
     private:

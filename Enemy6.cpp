@@ -13,6 +13,7 @@ Enemy6::Enemy6(SDL_Surface *screen, Player *player)
     this->acceleration=2;
     this->velocity=0;
     this->current_frame=0;
+    this->vida=30;
     //ctor
 }
 
@@ -25,16 +26,36 @@ Enemy6::~Enemy6()
 
 }
 
-void Enemy6::logic()
+void Enemy6::logic(vector<Bala*>bullets, SDL_Surface *screen, Player *player)
 {
+   for(int x=0;x<bullets.size();x++)
+   {
+     if((((bullets[x]->getx()>= this->getx())&& (bullets[x]->getx()<= this->getx()+10)) ||
+        ((bullets[x]->getx()+10 >= this->getx())&& (bullets[x]->getx()+10 <= this->getx()+10))) &&
+        (((bullets[x]->gety() >= this->gety()) && (bullets[x]->gety() <= this->gety()+20)) ||
+        ((bullets[x]->gety()+20 >= this->gety()) && (bullets[x]->gety()+20 <= this->gety()+20))))
+    {
+      this->vida-=5;
+      player->score+=5;
+    }
+   }
+
+   for(int x=0;x<this->bullets.size();x++)
+   {
+     if((((this->bullets[x]->getx()>= player->getx())&& (this->bullets[x]->getx()<= player->getx()+10)) ||
+        ((this->bullets[x]->getx()+10 >= player->getx())&& (this->bullets[x]->getx()+10 <= player->getx()+10))) &&
+        (((this->bullets[x]->gety() >= player->gety()) && (this->bullets[x]->gety() <= player->gety()+20)) ||
+        ((this->bullets[x]->gety()+20 >= player->gety()) && (this->bullets[x]->gety()+20 <= player->gety()+20))))
+    {
+      player->vida-=0.5;
+    }
+   }
+
     x-=8;
     if(x<-100)
         x=1000;
 
-   /*if(y>50)
-     y--;
-   else
-      y=400;*/
+    disparar(screen);
 
 }
 
@@ -50,6 +71,7 @@ void Enemy6::render()
     offset.x = x - images[current_frame]->w/2;
     offset.y = y - images[current_frame]->h/2;
 
+   if(vida>0)
     SDL_BlitSurface( images[current_frame], NULL, screen, &offset );
 
     current_frame++;
@@ -68,6 +90,12 @@ int Enemy6::gety()
     return this->y;
 }
 
+int Enemy6::getvida()
+{
+    return this->vida;
+}
+
+
 bool Enemy6::checkCollision()
 {
  if(
@@ -80,4 +108,20 @@ bool Enemy6::checkCollision()
   }
 
   return false;
+}
+
+void Enemy6::disparar(SDL_Surface * screen)
+{
+   for(int i=0;i<bullets.size();i++){
+    bullets[i]->draw(screen,bullets[i]->x,bullets[i]->y);
+    if(i%2==0)
+    {
+       bullets[i]->x-=30;
+       bullets[i]->y-=10;
+    }
+    bullets[i]->x-=10;
+    bullets[i]->y-=50;
+
+
+   }
 }

@@ -11,28 +11,47 @@ Enemy2::Enemy2(SDL_Surface *screen, Player *player)
     this->acceleration=2;
     this->velocity=0;
     this->current_frame=0;
+    this->vida=30;
     //ctor
 }
 
 Enemy2::~Enemy2()
 {
     SDL_FreeSurface( images[0] );
-   SDL_FreeSurface( images[1] );
+    SDL_FreeSurface( images[1] );
 
 }
 
-void Enemy2::logic()
+void Enemy2::logic(vector<Bala*>bullets, SDL_Surface *screen, Player *player)
 {
+   for(int x=0;x<bullets.size();x++)
+   {
+     if((((bullets[x]->getx()>= this->getx())&& (bullets[x]->getx()<= this->getx()+10)) ||
+        ((bullets[x]->getx()+10 >= this->getx())&& (bullets[x]->getx()+10 <= this->getx()+10))) &&
+        (((bullets[x]->gety() >= this->gety()) && (bullets[x]->gety() <= this->gety()+20)) ||
+        ((bullets[x]->gety()+20 >= this->gety()) && (bullets[x]->gety()+20 <= this->gety()+20))))
+    {
+      this->vida-=5;
+      player->score+=5;
+    }
+   }
+
+   for(int x=0;x<this->bullets.size();x++)
+   {
+     if((((this->bullets[x]->getx()>= player->getx())&& (this->bullets[x]->getx()<= player->getx()+10)) ||
+        ((this->bullets[x]->getx()+10 >= player->getx())&& (this->bullets[x]->getx()+10 <= player->getx()+10))) &&
+        (((this->bullets[x]->gety() >= player->gety()) && (this->bullets[x]->gety() <= player->gety()+20)) ||
+        ((this->bullets[x]->gety()+20 >= player->gety()) && (this->bullets[x]->gety()+20 <= player->gety()+20))))
+    {
+      player->vida-=0.5;
+    }
+   }
+
     x-=6;
     if(x<-100)
         x=1000;
 
-
-
-  /* if(y>50)
-     y--;
-   else
-      y=400;*/
+    disparar(screen);
 
 }
 
@@ -47,6 +66,12 @@ int Enemy2::getx()
    return this->x;
 }
 
+int Enemy2::getvida()
+{
+    return this->vida;
+}
+
+
 int Enemy2::gety()
 {
     return this->y;
@@ -59,6 +84,7 @@ void Enemy2::render()
     offset.x = x - images[current_frame]->w/2;
     offset.y = y - images[current_frame]->h/2;
 
+    if(vida>0)
     SDL_BlitSurface( images[current_frame], NULL, screen, &offset );
 
     current_frame++;
@@ -69,7 +95,7 @@ void Enemy2::render()
 bool Enemy2::checkCollision()
 {
  if(
-      (((player->getx()>= this->getx())&& (player->getx()<= this->getx()+10)) ||
+    (((player->getx()>= this->getx())&& (player->getx()<= this->getx()+10)) ||
     ((player->getx()+10 >= this->getx())&& (player->getx()+10 <= this->getx()+10))) &&
     (((player->gety() >= this->gety()) && (player->gety() <= this->gety()+20)) ||
     ((player->gety()+20 >= this->gety()) && (player->gety()+20 <= this->gety()+20))))
@@ -78,4 +104,13 @@ bool Enemy2::checkCollision()
   }
 
   return false;
+}
+
+void Enemy2::disparar(SDL_Surface * screen)
+{
+   for(int i=0;i<bullets.size();i++){
+    bullets[i]->draw(screen,bullets[i]->x,bullets[i]->y);
+    bullets[i]->x-=50;
+    bullets[i]->y+=10;
+   }
 }

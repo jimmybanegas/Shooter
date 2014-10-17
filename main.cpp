@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 #include "Background.h"
-
+#include <fstream>
 #include "Bala.h"
 #include "Enemy.h"
 #include "Enemy1.h"
@@ -17,7 +17,9 @@
 #include "Enemy7.h"
 #include "Timer.h"
 #include "Player.h"
+#include "Bala2.h"
 
+using namespace std;
 //Screen attributes
 const int SCREEN_WIDTH = 1000;
 const int SCREEN_HEIGHT = 500;
@@ -25,6 +27,7 @@ const int SCREEN_BPP = 32;
 
 SDL_Surface *screen = NULL;
 Timer* update;
+
 
 std::string toString(int number)
 {
@@ -40,6 +43,14 @@ std::string toString(int number)
     for (int i=0;i<(int)temp.length();i++)
         returnvalue+=temp[temp.length()-i-1];
     return returnvalue;
+}
+
+void agregarScore(int puntos)
+{
+    ofstream out("score.txt", ios::app);
+    out<<puntos<<endl;
+    out.close();
+
 }
 
 void apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip = NULL )
@@ -111,6 +122,8 @@ void frameCap()
     update->start();
 }
 
+vector<Bala*>bullets;
+
 int main( int argc, char* args[] )
 {
     //Initialize
@@ -118,10 +131,11 @@ int main( int argc, char* args[] )
     update=new Timer();
     update->start();
     SDL_Surface * game_over = IMG_Load( "game_over.png" );
+    SDL_Surface * backg = IMG_Load( "background.png" );
+    SDL_Surface * game_win = IMG_Load( "youwin.png" );
 
     TTF_Font *font = TTF_OpenFont( "lazy.ttf", 30 );
     SDL_Color textColor = { 255, 255, 255 };
-    SDL_Surface * score_surface = NULL;
 
     Mix_Chunk *jump = Mix_LoadWAV( "jump.ogg" );
     Mix_Chunk *shot = Mix_LoadWAV( "laser-pink.ogg" );
@@ -130,18 +144,18 @@ int main( int argc, char* args[] )
 
     Background background(screen);
     Player *player=new Player(screen);
-    Enemy1 enemy1(screen,player);
-    Enemy2 enemy2(screen,player);
-    Enemy3 enemy3(screen,player);
-    Enemy4 enemy4(screen,player);
-    Enemy5 enemy5(screen,player);
-    Enemy6 enemy6(screen,player);
-    Enemy7 enemy7(screen,player);
+    Enemy1 *enemy1=new Enemy1(screen,player);
+    Enemy2 *enemy2=new Enemy2(screen,player);
+    Enemy3 *enemy3=new Enemy3(screen,player);
+    Enemy4 *enemy4=new Enemy4(screen,player);
+    Enemy5 *enemy5=new Enemy5(screen,player);
+    Enemy6 *enemy6=new Enemy6(screen,player);
+    Enemy7 *enemy7=new Enemy7(screen,player);
+
 
     SDL_Event event;
     //Quit flag
     bool quit = false;
-    int score=0;
     SDL_Surface* opciones_de_juego = IMG_Load("menu/menu.png");
     SDL_Surface* instrucciones = IMG_Load("menu/instrucciones.png");
     SDL_Surface* cursor_opciones = IMG_Load("menu/cursor_menu.png");
@@ -151,45 +165,110 @@ int main( int argc, char* args[] )
 
     while( quit == false )
     {
-      //  if(menu)
-            // Mix_PlayChannel( -1, tittle, 0 );
-     //   else if(!=menu)
-           //  Mix_PlayChannel( -1, tittle, 0 );
-           if(enemy1.checkCollision())
-            player->vida-=0.5;
-           if(enemy2.checkCollision())
-            player->vida-=0.5;
-           if(enemy3.checkCollision())
-            player->vida-=0.5;
-           if(enemy4.checkCollision())
-            player->vida-=0.5;
-           if(enemy5.checkCollision())
-            player->vida-=0.5;
-           if(enemy6.checkCollision())
-            player->vida-=0.5;
-           if(enemy7.checkCollision())
-            player->vida-=0.5;
+      if(menu)
+             //Mix_PlayChannel( -1, tittle, 0 );
+
+           if(enemy1->checkCollision())
+           {
+               if(enemy1->getvida()>0)
+               {
+                Mix_PlayChannel( -1, jump, 0 );
+                player->vida-=0.5;
+               }
+
+           }
+           if(enemy2->checkCollision())
+           {
+              if(enemy2->getvida()>0)
+               {
+                Mix_PlayChannel( -1, jump, 0 );
+                player->vida-=0.5;
+               }
+           }
+           if(enemy3->checkCollision())
+           {
+             if(enemy3->getvida()>0)
+               {
+                Mix_PlayChannel( -1, jump, 0 );
+                player->vida-=0.5;
+               }
+           }
+           if(enemy4->checkCollision())
+            {
+               if(enemy4->getvida()>0)
+               {
+                Mix_PlayChannel( -1, jump, 0 );
+                player->vida-=0.5;
+               }
+            }
+           if(enemy5->checkCollision())
+           {
+             if(enemy5->getvida()>0)
+               {
+                Mix_PlayChannel( -1, jump, 0 );
+                player->vida-=0.5;
+               }
+           }
+           if(enemy6->checkCollision())
+           {
+              if(enemy6->getvida()>0)
+               {
+                Mix_PlayChannel( -1, jump, 0 );
+                player->vida-=0.5;
+               }
+           }
+           if(enemy7->checkCollision())
+           {
+              if(enemy7->getvida()>0)
+               {
+                Mix_PlayChannel( -1, jump, 0 );
+                player->vida-=0.5;
+               }
+           }
+
+           if(enemy1->getvida()<=0&&enemy2->getvida()<=0&&enemy3->getvida()<=0&&enemy4->getvida()<=0&&enemy5->getvida()<=0&&enemy6->getvida()<=0&&enemy7->getvida()<=0)
+                break;
 
         SDL_Rect offset;
         offset.x = 0;
         offset.y = 0;
+
         if(player->vida==0)
            break;
 
         SDL_Surface * vidas_surface = TTF_RenderText_Solid( font, toString(player->vida).c_str(), textColor );
+        SDL_Surface * score_surface = TTF_RenderText_Solid( font, toString(player->score).c_str(), textColor );
 
                //If there's an event to handle
         Uint8 *keystates = SDL_GetKeyState( NULL );
 
+
           if( keystates[ SDLK_d ] )
             {
-               player->bullets.push_back(new Bala(player->getx()+10, player->gety()));
+               bullets.push_back(new Bala(player->getx()+10, player->gety()));
                Mix_PlayChannel( -1, shot, 0 );
-
             }
 
-           player->disparar(screen);
+              if(enemy2->getvida()>0)
+              {
+                enemy2->bullets.push_back(new Bala(enemy2->getx()+10, enemy2->gety()));
+              }
+              if(enemy4->getvida()>0)
+              {
+                enemy4->bullets.push_back(new Bala(enemy4->getx()+10, enemy4->gety()));
+              }
+              if(enemy6->getvida()>0)
+              {
+                enemy6->bullets.push_back(new Bala2(enemy6->getx(), enemy6->gety()-20));
+              }
 
+        if(bullets.size()!=0)
+        {
+            for(int i=0;i<bullets.size();i++){
+                bullets[i]->draw(screen,bullets[i]->x,bullets[i]->y);
+                bullets[i]->x+=15;
+            }
+        }
 
         if( SDL_PollEvent( &event ) )
         {
@@ -226,21 +305,7 @@ int main( int argc, char* args[] )
                     case SDLK_RIGHT:
                          player->x+=20;
                     break;
-                    case SDLK_SPACE:
-                        player->jump();
-                        //Mix_PlayChannel( -1, jump, 0 );
-                    break;
-                    case SDLK_d:
 
-                        //  Mix_PlayChannel( -1, shot, 0 );
-                    break;
-                      //  player.disparar(screen);
-
-                        //  Mix_PlayChannel( -1, jump, 0 );
-                 //   break;
-
-                    /*default:
-                        break;*/
                   }
             }
             else if( event.type == SDL_QUIT )
@@ -255,59 +320,47 @@ int main( int argc, char* args[] )
             apply_surface(0,0,opciones_de_juego,screen);
             apply_surface((cursor_opciones_x*219),cursor_opciones_y,cursor_opciones,screen);
 
-              if( SDL_PollEvent( &event ) )
+            if( keystates[ SDLK_ESCAPE ] )
             {
-
-            //If a key was pressed
-            if( event.type == SDL_KEYDOWN )
-            {
-                 /* if(cursor_opciones_y>200)
-                            cursor_opciones_y=200;
-                  if(cursor_opciones_y>410)
-                            cursor_opciones_y=410;*/
-
-                //Set the proper message surface
-                switch( event.key.keysym.sym )
-                {
-                    case SDLK_ESCAPE: quit = true; break;
-                    case SDLK_UP:
-                          cursor_opciones_y-=70;
-                    break;
-                    case SDLK_DOWN:
-                          cursor_opciones_y+=70;
-                    break;
-                    case SDLK_RETURN:
-                          if(cursor_opciones_y==200)
-                          {
-                            menu=false;
-                            //break;
-                          }
-                          else if(cursor_opciones_y==270)
-                          {
-                             // SDL_FreeSurface( screen );
-                              apply_surface(0,0,instrucciones,screen);
-                            //  SDL_Delay(5000);
-
-                                switch( event.key.keysym.sym )
-                                {
-                                   case SDLK_RETURN:
-                                       break;
-                                }
-                          }
-                          else if(cursor_opciones_y==340)
-                            quit=true;
-                          else if(cursor_opciones_y==410)
-                            quit=true;
-                        break;
-                  }
+              quit=true;
             }
-            //If the user has Xed out the window
-            else if( event.type == SDL_QUIT )
+            if( keystates[ SDLK_UP ] )
             {
-                //Quit the program
-                quit = true;
+              cursor_opciones_y-=70;
             }
-        }
+            if( keystates[ SDLK_DOWN ] )
+            {
+              cursor_opciones_y+=70;
+            }
+            if( keystates[ SDLK_RETURN ] && cursor_opciones_y==200)
+            {
+             menu=false;
+            }
+            if( keystates[ SDLK_RETURN ] && cursor_opciones_y==270)
+            {
+             apply_surface(700,0,instrucciones,screen);
+            }
+            if( keystates[ SDLK_RETURN ] && cursor_opciones_y==340)
+            {
+                  ifstream in ("score.txt");
+
+                  int maxi =-9999;
+
+                   while(!in.eof())
+                   {
+                       int puntos;
+                       in>>puntos;
+                        if(maxi<puntos)
+                            maxi=puntos;
+                   }
+                printf("|%6d|\n", maxi);
+                SDL_Surface * maxim = TTF_RenderText_Solid( font, toString(maxi).c_str(), textColor );
+                apply_surface(800,250,maxim,screen);
+            }
+            if( keystates[ SDLK_RETURN ] && cursor_opciones_y==410)
+            {
+             quit=true;
+            }
 
         }
         if (menu==false)
@@ -315,43 +368,33 @@ int main( int argc, char* args[] )
 
         background.logic();
         apply_surface(10,10,vidas_surface,screen);
+        apply_surface(950,10,score_surface,screen);
         player->logic();
-        enemy1.logic();
-        enemy2.logic();
-        enemy3.logic();
-        enemy4.logic();
-        enemy5.logic();
-        enemy6.logic();
-        enemy7.logic();
+        enemy1->logic(bullets);
+        enemy2->logic(bullets, screen,player);
+        enemy3->logic(bullets);
+        enemy4->logic(bullets, screen, player);
+        enemy5->logic(bullets);
+        enemy6->logic(bullets, screen, player);
+        enemy7->logic(bullets);
 
         SDL_Rect offset;
         offset.x = 0;
         offset.y = 0;
 
-        SDL_Surface * score_surface = TTF_RenderText_Solid( font, toString(score+=5).c_str(), textColor );
-        //SDL_BlitSurface( score_surface, NULL, screen, &offset );
-        SDL_Flip( screen );
-        SDL_FreeSurface( score_surface );
-        SDL_FreeSurface( vidas_surface );
 
-       /* if(player.x-enemy.x<50
-           && player.x-enemy.x>-50
-           && player.y-enemy.y<50
-           && player.y-enemy.y>-50
-           )
-        {
-           break;
-        }*/
+        SDL_Flip( screen );
+        SDL_FreeSurface( vidas_surface );
 
             background.render();
             player->render();
-            enemy1.render();
-            enemy2.render();
-            enemy3.render();
-            enemy4.render();
-            enemy5.render();
-            enemy6.render();
-            enemy7.render();
+            enemy1->render();
+            enemy2->render();
+            enemy3->render();
+            enemy4->render();
+            enemy5->render();
+            enemy6->render();
+            enemy7->render();
         }
 
         frameCap();
@@ -390,8 +433,22 @@ int main( int argc, char* args[] )
         offset.x = 0;
         offset.y = 0;
 
-        SDL_BlitSurface( game_over, NULL, screen, &offset );
-        Mix_PlayChannel( -1, gameover, 0 );
+        if(enemy1->vida<=0&&enemy2->vida<=0&&enemy3->vida<=0&&enemy4->vida<=0&&enemy5->vida<=0&&enemy6->vida<=0&&enemy7->vida<=0)
+        {
+            SDL_BlitSurface( game_win, NULL, screen, &offset );
+            Mix_PlayChannel( -1, gameover, 0 );
+        }
+        else if(player->vida==0)
+        {
+          SDL_BlitSurface( game_over, NULL, screen, &offset );
+          Mix_PlayChannel( -1, gameover, 0 );
+        }
+        else
+        {
+           SDL_BlitSurface( backg, NULL, screen, &offset );
+        }
+
+
         frameCap();
 
         //Update the screen
@@ -400,7 +457,7 @@ int main( int argc, char* args[] )
             return 1;
         }
     }
-
+    agregarScore(player->score);
     clean_up();
 
     return 0;

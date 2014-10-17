@@ -14,6 +14,7 @@ Enemy5::Enemy5(SDL_Surface *screen, Player *player)
     this->acceleration=2;
     this->velocity=0;
     this->current_frame=0;
+    this->vida=30;
     //ctor
 }
 
@@ -28,19 +29,23 @@ Enemy5::~Enemy5()
 
 }
 
-void Enemy5::logic()
+void Enemy5::logic(vector<Bala*>bullets)
 {
+   for(int x=0;x<bullets.size();x++)
+   {
+     if((((bullets[x]->getx()>= this->getx())&& (bullets[x]->getx()<= this->getx()+10)) ||
+        ((bullets[x]->getx()+10 >= this->getx())&& (bullets[x]->getx()+10 <= this->getx()+10))) &&
+        (((bullets[x]->gety() >= this->gety()) && (bullets[x]->gety() <= this->gety()+20)) ||
+        ((bullets[x]->gety()+20 >= this->gety()) && (bullets[x]->gety()+20 <= this->gety()+20))))
+    {
+      this->vida-=5;
+      player->score+=5;
+    }
+   }
+
     x-=6;
     if(x<-100)
         x=1000;
-
-
-
-   /*if(y>50)
-     y--;
-   else
-      y=400;
-      */
 
 }
 
@@ -59,6 +64,11 @@ int Enemy5::gety()
     return this->y;
 }
 
+int Enemy5::getvida()
+{
+    return this->vida;
+}
+
 
 void Enemy5::render()
 {
@@ -67,6 +77,7 @@ void Enemy5::render()
     offset.x = x - images[current_frame]->w/2;
     offset.y = y - images[current_frame]->h/2;
 
+  if(vida>0)
     SDL_BlitSurface( images[current_frame], NULL, screen, &offset );
 
     current_frame++;

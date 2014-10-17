@@ -5,8 +5,11 @@
 #include "SDL/SDL_image.h"
 #include "SDL/SDL_ttf.h"
 #include <string>
-#include "Enemy.h"
+#include <vector>
 #include "Player.h"
+#include "Bala.h"
+
+using namespace std;
 
 class Enemy
 {
@@ -21,13 +24,15 @@ public:
     int current_frame;
     SDL_Surface *images[3];
     SDL_Surface *screen;
-    Player *player;
+    int vida;
+
+    //Player *player;
     virtual int getx();
     virtual int gety();
     virtual void logic();
     virtual void render();
     virtual void jump();
-    virtual bool checkCollision();
+
     Enemy();
     virtual ~Enemy();
 

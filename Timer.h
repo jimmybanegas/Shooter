@@ -2,7 +2,7 @@
 #define TIMER_H
 
 #include "SDL/SDL.h"
-
+using namespace std;
 //The timer
 class Timer
 {

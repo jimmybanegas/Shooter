@@ -1,9 +1,9 @@
 #include "Bala.h"
 
+
+
 Bala::Bala(int x, int y)
 {
-  //  this->screen = screen;
-    //this->images[0] = IMG_Load( "player/fireball.png" );
     this->x=x;
     this->y=y;
     this->image=IMG_Load("player/laser-red.png");
@@ -34,8 +34,6 @@ SDL_Surface* Bala::imagen()
 
 }
 
-
-
 void Bala::draw(SDL_Surface* screen,int x,int y) {
     //Holds offsets
     SDL_Rect offset;
@@ -46,5 +44,3 @@ void Bala::draw(SDL_Surface* screen,int x,int y) {
     SDL_BlitSurface( image, NULL, screen, &offset );
 
 }
-
-

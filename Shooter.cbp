@@ -36,6 +36,8 @@
 		<Unit filename="Background.h" />
 		<Unit filename="Bala.cpp" />
 		<Unit filename="Bala.h" />
+		<Unit filename="Bala2.cpp" />
+		<Unit filename="Bala2.h" />
 		<Unit filename="Enemy.cpp" />
 		<Unit filename="Enemy.h" />
 		<Unit filename="Enemy1.cpp" />
